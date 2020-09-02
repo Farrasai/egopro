@@ -28,8 +28,10 @@
                   @enderror 
               </div> 
 
+              <label for=""><a href="{{ route('password.request') }}" class="text-primary">Lupa password ?</a></label>
+
             </div> 
-            <div class="contact_form_button">
+            <div class="contact_form_button mt-3">
               <button type="submit" class="btn btn-info">Login</button>
             </div>
           </form>

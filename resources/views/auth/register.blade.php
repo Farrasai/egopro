@@ -10,27 +10,47 @@
                     <form method="POST" action="{{ route('register') }}">@csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Full Name</label>
-                        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" required placeholder="Enter your full name">
+                        <input type="text" class="form-control text-dark" name="name" aria-describedby="emailHelp" required placeholder="Enter your full name" value="{{ old('name')}}">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
             
                     <div class="form-group">
                         <label for="exampleInputEmail1">Phone</label>
-                        <input type="text" class="form-control @error('nohp') is-invalid @enderror" name="nohp" value="{{ old('nohp') }}" aria-describedby="emailHelp" required placeholder="Enter your number phone">
+                        <input type="text" class="text-dark form-control @error('nohp') is-invalid @enderror" name="nohp" value="{{ old('nohp') }}" aria-describedby="emailHelp" required placeholder="Enter your number phone">
+                        @error('nohp')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
             
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required placeholder="Enter your email">
+                        <input type="email" class="text-dark form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" required placeholder="Enter your email">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
             
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="password" class="form-control" name="password" aria-describedby="emailHelp" required placeholder="Enter your password" autocomplete="new-password">
+                        <input type="password" class=" text-dark form-control" name="password" aria-describedby="emailHelp" required placeholder="Enter your password" autocomplete="new-password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
             
                     <div class="form-group">
                         <label for="exampleInputEmail1">Confirm Password</label>
-                        <input type="password" class="form-control" name="password_confirmation" aria-describedby="emailHelp" required placeholder="Re-type password">
+                        <input type="password" class=" text-dark form-control" name="password_confirmation" aria-describedby="emailHelp" required placeholder="Re-type password">
                     </div>
             
                     <div class="contact_form_button">

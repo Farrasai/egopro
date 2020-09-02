@@ -19,13 +19,15 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home.user');
 Route::get('/user/logout', 'UserController@logout')->name('user.logout');
+Route::get('user/password', 'UserController@editPassword')->name('password.edit')->middleware('auth');
+Route::post('user/password', 'UserController@updatePassword')->name('password.update');
 
 // Admin
-Route::get('admin/home', 'Admin\AdminController@index');
-Route::get('admin', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin', 'Admin\Auth\LoginController@login');
+Route::get('dashboard', 'Admin\AdminController@index');
+Route::get('admin/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+Route::post('admin/login', 'Admin\Auth\LoginController@login');
 Route::get('admin/logout', 'Admin\AdminController@logout')->name('admin.logout');
 
 Route::get('admin/edit/profile', 'Admin\AdminController@showEdit')->name('admin.edit');

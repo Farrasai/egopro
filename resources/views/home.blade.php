@@ -1,62 +1,48 @@
 @extends('layouts.app')
 @section('content')
 @include('layouts.menubar')
-  <div class="contact_form">
+  <div class="contact_form" style="margin-top:-50px">
+    @if(Auth::check() && !Auth::user()->email_verified_at)
+    <div class="row justify-content-center">
+      <div class="col-11">
+        <div class="verify alert alert-danger">
+          Akun anda belum di verifikasi
+          <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+            @csrf
+            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Click untuk memverifikasi</button>.
+          </form>
+        </div>
+      </div>
+    </div>
+    @endif
     <div class="container">
       <div class="row">
-        <div class="col-8 card">
+        <div class="col-9 card">
           <div class="card-title mt-4 text-center">
-            <h3>History Sewa</h3>
+            <h3>Riwayat Penyewaan</h3>
           </div>
-          <table class="table table-response">
+          <table class="table table-response mt-3">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Body</th>
+                <th scope="col">Barang</th>
+                <th scope="col">Nama Barang</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td scope="col">1</td>
-                <td scope="col">Mark 1</td>
-                <td scope="col">Mark 2</td>
-                <td scope="col">Mark 3</td>
-              </tr>
-              <tr>
-                <td scope="col">1</td>
-                <td scope="col">Mark 1</td>
-                <td scope="col">Mark 2</td>
-                <td scope="col">Mark 3</td>
-              </tr>
-              <tr>
-                <td scope="col">1</td>
-                <td scope="col">Mark 1</td>
-                <td scope="col">Mark 2</td>
-                <td scope="col">Mark 3</td>
+              <tr style="line-height: 70px">
+                <td scope="col" >1</td>
+                <td scope="col"><img src="{{ asset('frontend-theme/images/single_4.jpg') }}" style="width: 70px; height:70px;"></td>
+                <td scope="col">Laptop</td>
+                <td scope="col">03 September 2020</td>
+                <td scope="col"><div class="badge badge-primary">Success</div></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-4">
-          <div class="card">
-            <img src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
-            <div class="card-body">
-              <div class="card-title text-center">
-                <h5>{{ Auth::user()->name }}</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="">Ubah Profile</a></li>
-                <li class="list-group-item"><a href="">Ubah Password</a></li>
-                <li class="list-group-item"><a href="">Ubah Sewa</a></li>
-              </ul>
-              <div class="card-body">
-                <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        @include('layouts.profile_user')
       </div>
     </div>
     <div class="panel"></div>

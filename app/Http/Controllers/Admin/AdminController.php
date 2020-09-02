@@ -17,11 +17,6 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function tes()
-    {
-        return view('adminPage');
-    }
-
     public function index()
     {
         return view('adminowner.home');

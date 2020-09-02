@@ -15,12 +15,14 @@ class AdminsOwnersTableSeeder extends Seeder
             'name' => 'Admin',
             'username' => 'egoproAdmin',
             'password' => bcrypt('123123123'),
+            'role' => 1
         ]);
 
         DB::table('admins')->insert([
             'name' => 'Owner',
             'username' => 'egoproOwner',
             'password' => bcrypt('123123123'),
+            'role' => 2
         ]);
     }
 }
