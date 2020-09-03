@@ -19,10 +19,30 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+// User
 Route::get('/home', 'HomeController@index')->name('home.user');
 Route::get('/user/logout', 'UserController@logout')->name('user.logout');
+// Ubah Password User
 Route::get('user/password', 'UserController@editPassword')->name('password.edit')->middleware('auth');
 Route::post('user/password', 'UserController@updatePassword')->name('password.update');
+// Ubah profile User
+Route::get('user/edit/profile', 'UserController@editProfile')->name('userProfile.edit')->middleware('auth');
+Route::post('user/update/profile', 'UserController@updateProfile')->name('userProfile.update')->middleware('auth');
+// Ubah penyewaan User
+Route::get('user/edit/sewa', 'UserSewaController@editSewa')->name('userSewa.edit');
+
+// All Product
+Route::get('allProduct', 'ProductController@product')->name('all.product');
+// Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail');
+Route::get('product/details/', 'ProductController@productDetail');
+
+// Add to Cart
+Route::get('product/cart', 'CartController@showCart')->name('show.cart');
+
+
+
+
+
 
 // Admin
 Route::get('dashboard', 'Admin\AdminController@index');

@@ -17,6 +17,18 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/contact_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/contact_responsive.css') }}">
 
+{{-- All Product --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/plugins/jquery-ui-1.12.1.custom/jquery-ui.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/shop_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/shop_responsive.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/product_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/product_responsive.css') }}">
+
+{{-- Cart --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/cart_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend-theme/styles/cart_responsive.css') }}">
+
 {{-- Toaster --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
@@ -78,6 +90,16 @@
 <script src="{{asset('frontend-theme/plugins/slick-1.8.0/slick.js')}}"></script>
 <script src="{{asset('frontend-theme/plugins/easing/easing.js')}}"></script>
 <script src="{{ asset('frontend-theme/js/custom.js') }}"></script>
+{{-- All product --}}
+<script src="{{ asset('frontend-theme/plugins/Isotope/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('frontend-theme/plugins/jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
+<script src="{{ asset('frontend-theme/plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('frontend-theme/js/shop_custom.js') }}"></script>
+<script src="{{ asset('frontend-theme/js/product_custom.js') }}"></script>
+{{-- Cart --}}
+<script src="{{ asset('frontend-theme/js/cart_custom.js') }}"></script>
+
+
 {{-- Toaster  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
