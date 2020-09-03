@@ -5,7 +5,7 @@
       <!-- Logo -->
       <div class="col-lg-2 col-sm-3 col-3 order-1">
         <div class="logo_container">
-          <div class="logo"><a href="#">OneTech</a></div>
+          <div class="logo"><a href="{{ url('/') }}">Egopro</a></div>
         </div>
       </div>
 
@@ -83,7 +83,7 @@
                 <div class="cart_count"><span>10</span></div>
               </div>
               <div class="cart_content">
-                <div class="cart_text"><a href="#">Cart</a></div>
+                <div class="cart_text"><a href="{{ route('show.cart') }}">Cart</a></div>
                 <div class="cart_price">$85</div>
               </div>
             </div>
@@ -138,52 +138,24 @@
 
             <div class="main_nav_menu ml-auto">
               <ul class="standard_dropdown main_nav_dropdown">
-                <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-                <li class="hassubs">
-                  <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-                  <ul>
-                    <li>
-                      <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                      <ul>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                  </ul>
-                </li>
-                <li class="hassubs">
-                  <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-                  <ul>
-                    <li>
-                      <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                      <ul>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                  </ul>
-                </li>
                 <li class="hassubs">
                   <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                   <ul>
-                    <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                    <li>
+                      <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                      <ul>
+                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                   </ul>
                 </li>
-                <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="{{ route('all.product') }}">Product<i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="contact.html">Info<i class="fas fa-chevron-down"></i></a></li>
                 <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
               </ul>
             </div>
