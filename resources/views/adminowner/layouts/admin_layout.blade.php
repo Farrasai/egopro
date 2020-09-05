@@ -174,7 +174,11 @@
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name">{{ Auth::user()->name }}</span></span>
-              <img src="img/img3.jpg" class="wd-32 rounded-circle" alt="">
+              @if(!Auth::user()->avatar == NULL)
+                <img src="{{ asset(Auth::user()->avatar) }}" class="wd-32 rounded-circle" alt="">
+              @else
+                <img src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" class="wd-32 rounded-circle" alt="">
+              @endif
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">

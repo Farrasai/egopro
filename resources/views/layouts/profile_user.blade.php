@@ -1,7 +1,11 @@
 
 <div class="col-lg-3 col-sm-12">
   <div class="card">
-    <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
+    @if(!Auth::user()->avatar == NULL)
+      <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
+    @else
+      <img src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
+    @endif
     <div class="card-body">
       <div class="card-title text-center">
         <h5>{{ Auth::user()->name  }}</h5>

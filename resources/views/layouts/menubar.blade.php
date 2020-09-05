@@ -1,11 +1,13 @@
-
+<?php
+  $categories = DB::table('categories')->get();
+?>
 <div class="header_main">
   <div class="container">
     <div class="row">
       <!-- Logo -->
       <div class="col-lg-2 col-sm-3 col-3 order-1">
         <div class="logo_container">
-          <div class="logo"><a href="{{ url('/') }}">Egopro</a></div>
+          <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset('media/egopro/logo.png') }}" alt="" style="width: 120px; height: 60px;"></a></div>
         </div>
       </div>
 
@@ -28,16 +30,18 @@
                     <span class="custom_dropdown_placeholder clc"
                       >All Categories</span
                     >
-                    <i class="fas fa-chevron-down"></i>
+                    {{-- <i class="fas fa-chevron-down"></i> --}}
                     <ul class="custom_list clc">
+                      @foreach ($categories as $category)
                       <li>
-                        <a class="clc" href="#">All Categories</a>
+                        <a class="clc" href="#">{{ $category->category_name }}</a>
                       </li>
-                      <li><a class="clc" href="#">Audio</a></li>
+                      @endforeach
+                      {{-- <li><a class="clc" href="#">Audio</a></li>
                       <li><a class="clc" href="#">Camera</a></li>
                       <li><a class="clc" href="#">Equipment</a></li>
                       <li><a class="clc" href="#">Lens</a></li>
-                      <li><a class="clc" href="#">Lighting</a></li>
+                      <li><a class="clc" href="#">Lighting</a></li> --}}
                     </ul>
                   </div>
                 </div>
@@ -74,6 +78,7 @@
           </div>
 
           <!-- Cart -->
+          @if(Auth::check())
           <div class="cart">
             <div
               class="cart_container d-flex flex-row align-items-center justify-content-end"
@@ -82,12 +87,15 @@
                 <img src="{{asset('frontend-theme/images/cart.png')}}" alt="" />
                 <div class="cart_count"><span>10</span></div>
               </div>
+          
               <div class="cart_content">
                 <div class="cart_text"><a href="{{ route('show.cart') }}">Cart</a></div>
                 <div class="cart_price">$85</div>
               </div>
             </div>
           </div>
+          @else
+          @endif
         </div>
       </div>
     </div>
@@ -110,7 +118,10 @@
               </div>
 
               <ul class="cat_menu">
-                <li><a href="#">Audio <i class="fas fa-chevron-right ml-auto"></i></a></li>
+                @foreach ($categories as $category)
+                  <li><a href="#">{{ $category->category_name  }}<i class="fas fa-chevron-right ml-auto"></i></a></li>  
+                @endforeach
+                {{-- <li><a href="#">Audio <i class="fas fa-chevron-right ml-auto"></i></a></li>
                 <li><a href="#">Camera<i class="fas fa-chevron-right"></i></a></li>
                 <li class="hassubs">
                   <a href="#">Equipment<i class="fas fa-chevron-right"></i></a>
@@ -130,7 +141,7 @@
                   </ul>
                 </li>
                 <li><a href="#">Lensa<i class="fas fa-chevron-right"></i></a></li>
-                <li><a href="#">Lighting<i class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#">Lighting<i class="fas fa-chevron-right"></i></a></li> --}}
               </ul>
             </div>
 

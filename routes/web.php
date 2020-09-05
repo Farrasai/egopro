@@ -33,8 +33,8 @@ Route::get('user/edit/sewa', 'UserSewaController@editSewa')->name('userSewa.edit
 
 // All Product
 Route::get('allProduct', 'ProductController@product')->name('all.product');
-// Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail');
-Route::get('product/details/', 'ProductController@productDetail');
+Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail');
+// Route::get('product/details/', 'ProductController@productDetail');
 
 // Add to Cart
 Route::get('product/cart', 'CartController@showCart')->name('show.cart');

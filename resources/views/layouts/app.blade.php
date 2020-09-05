@@ -32,6 +32,27 @@
 {{-- Toaster --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
+{{-- Datepicker --}}
+<link
+rel="stylesheet"
+href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+/>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<link
+rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+/>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.css
+
+
+
+">
+
 </head>
   <body>
     <div class="super_container">
@@ -98,7 +119,14 @@
 <script src="{{ asset('frontend-theme/js/product_custom.js') }}"></script>
 {{-- Cart --}}
 <script src="{{ asset('frontend-theme/js/cart_custom.js') }}"></script>
+{{-- Date --}}
 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js
+"></script>
 
 {{-- Toaster  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -123,8 +151,67 @@
       break
     }
   @endif
-  
 </script>
-</body>
 
+<script>
+  var lama = {
+    sewa: "",
+    pengembalian: "",
+    init: function () {
+      this.setFirst();
+      this.setSecond();
+    },
+    setFirst: function () {
+      var _this = this;
+      $("#datetimepickerSewa").datepicker({
+        onSelect: function () {
+          _this.sewa = $(this).val();
+          _this.calcDiff("datetimepickerSewa");
+        },
+        minDate: new Date(),
+        // dateFormat: "dd-mm-yy"
+      });
+    },
+    setSecond: function () {
+      var _this = this;
+      $("#datetimepickerPengembalian").datepicker({
+        onSelect: function () {
+          _this.pengembalian = $(this).val();
+          _this.calcDiff("datetimepickerPengembalian");
+        },
+        minDate: new Date(),
+        // dateFormat: "dd-mm-yy"
+      });
+    },
+    calcDiff: function (string) {
+      var date1 = new Date(this.sewa);
+      var date2 = new Date(this.pengembalian);
+
+      var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      if (date1 > date2) {
+        var newdate = $("#" + string).datepicker("getDate");
+        newdate.setDate(new Date(newdate).getDate());
+        if (string == "datetimepickerSewa") {
+          this.pengembalian = newdate;
+          $("#datetimepickerPengembalian").datepicker("setDate", newdate);
+          $("#lama").val(0);
+        } else {
+          this.sewa = newdate;
+          $("#datetimepickerSewa").datepicker("setDate", newdate);
+          $("#lama").val(0);
+        }
+      } else {
+        $("#lama").val(`${diffDays} Hari`);
+      }
+    },
+  };
+  lama.init();
+</script>
+<script>
+  $("#jamSewa").timepicker();
+  $("#jamPengembalian").timepicker();
+</script>
+
+</body>
 </html>

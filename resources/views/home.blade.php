@@ -35,14 +35,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr style="line-height: 70px">
+              <tr >
                 <td scope="col" >1</td>
                 <td scope="col" >7sd26231sz2</td>
                 <td scope="col"><img src="{{ asset('frontend-theme/images/single_4.jpg') }}" style="width: 70px; height:70px;"></td>
                 <td scope="col">Laptop</td>
                 <td scope="col">03 September 2020</td>
                 <td scope="col">05 September 2020</td>
-                <td scope="col"><div class="badge badge-success">Sewa</div></td>
+                <td scope="col"><div class="badge progress-bar-success">Sewa</div></td>
               </tr>
             </tbody>
           </table>

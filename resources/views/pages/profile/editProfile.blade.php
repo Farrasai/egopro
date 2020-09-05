@@ -15,7 +15,11 @@
                 <div class="row">
                   <div class="col-5">
                       <h5 class="form-control-label text-center">Foto Profile</h5><br>
-                      <img id="img" src="{{ URL::to($data->avatar) }}" style="width: 220px; height:220px; margin-left:45px">
+                      @if($data->avatar)
+                        <img id="img" src="{{ URL::to($data->avatar) }}" style="width: 220px; height:220px; margin-left:45px">
+                      @else
+                        <img id="img" src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2"   style="width: 220px; height:220px; margin-left:45px">
+                      @endif
                         <div class="form-group">
                           <label class="custom-file">
                             <input type="file" id="file" class="custom-file-input" value="{{ $data->avatar }}" name="avatar" onchange="readURL(this)">

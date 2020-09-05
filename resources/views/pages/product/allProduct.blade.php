@@ -75,7 +75,7 @@
             <div class="product_grid_border"></div>
 
             <!-- Product Item -->
-            <div class="product_item is_new">
+            {{-- <div class="product_item is_new">
               <div class="product_border"></div>
               <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('frontend-theme/images/new_5.jpg') }}" alt=""></div>
               <div class="product_content">
@@ -102,24 +102,22 @@
                 <li class="product_mark product_discount">-25%</li>
                 <li class="product_mark product_new">new</li>
               </ul>
-            </div>
+            </div> --}}
 
             <!-- Product Item -->
+            @foreach ($products as $product)
             <div class="product_item">
               <div class="product_border"></div>
-              <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('frontend-theme/images/featured_2.png') }}" alt=""></div>
+              <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image) }} " style="height: 100px; widht:100px;"  alt=""></div>
               <div class="product_content">
-                <div class="product_price">$379</div>
-                <div class="product_name"><div><a href="#" tabindex="0">Apple iPod shuffle</a></div></div>
+                <div class="product_price text-danger font-weight-bold">Rp.{{ $product->price }}</div>
+                <div class="product_name" style="margin-top: -10px"><div><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}" tabindex="0">{{ $product->product_name }}</a></div></div>
               </div>
               <div class="product_fav"><i class="fas fa-heart"></i></div>
-              <ul class="product_marks">
-                <li class="product_mark product_discount">-25%</li>
-                <li class="product_mark product_new">new</li>
-              </ul>
             </div>
+            @endforeach
 
-            <!-- Product Item -->
+            {{-- <!-- Product Item -->
             <div class="product_item">
               <div class="product_border"></div>
               <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('frontend-theme/images/featured_3.png') }}" alt=""></div>
@@ -192,7 +190,7 @@
                 <li class="product_mark product_discount">-25%</li>
                 <li class="product_mark product_new">new</li>
               </ul>
-            </div>
+            </div> --}}
           </div>
 
           <!-- Shop Page Navigation -->

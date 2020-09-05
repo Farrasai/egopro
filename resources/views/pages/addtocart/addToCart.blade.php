@@ -13,40 +13,50 @@
                 <div class="cart_item_image text-center"><br><br><img src="{{ asset('frontend-theme/images/single_4.jpg') }}" alt="" style="width:70px;"></div>
                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                   <div class="cart_item_name cart_info_col">
-                    <div class="cart_item_title">Nama</div>
+                    <div class="cart_item_title text-center">Nama</div>
                     <div class="cart_item_text">Laptop</div>
                   </div>
 
                   <div class="cart_item_quantity cart_info_col">
-                    <div class="cart_item_title">Quantity</div>
+                    <div class="cart_item_title text-center">Quantity</div>
                     <form action="" method="POST">@csrf
                       <input type="hidden" name="productId" value="">
                       <input class="form-control" type="number" name="qty" value="3" style="width: 70px; margin-top:30px; display:inline">
-                      <button type="submit" class="btn btn-success btn-md"><i class="fas fa-check-square"></i></button>
                     </form>
                   </div>
 
                   <div class="cart_item_price cart_info_col">
-                    <div class="cart_item_title">Harga/Hari</div>
+                    <div class="cart_item_title text-center">Harga/Hari</div>
                     <div class="cart_item_text">Rp.350.000</div>
                   </div>
 
                   <div class="cart_item_quantity cart_info_col">
-                    <div class="cart_item_title">Lama Sewa</div>
+                    <div class="cart_item_title text-center">Tanggal Sewa</div>
                     <form action="" method="POST">@csrf
-                      <input type="hidden" name="productId" value="">
-                      <input class="form-control" type="number" name="qty" value="3" style="width: 70px; margin-top:30px; display:inline">
-                      <button type="submit" class="btn btn-success btn-md"><i class="fas fa-check-square"></i></button>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="datetimepickerSewa" style="width: 120px; margin-top:30px; display:inline; border-radius:5px">
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="cart_item_quantity cart_info_col">
+                    <div class="cart_item_title text-center">Tanggal Pengembalian</div>
+                    <form action="" method="POST">@csrf
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="datetimepickerPengembalian" style="width: 120px; margin-top:30px; display:inline;border-radius:5px">
+                      </div>
                     </form>
                   </div>
 
                   <div class="cart_item_total cart_info_col">
-                    <div class="cart_item_title">Total</div>
+                    <div class="cart_item_title text-center">Total</div>
                     <div class="cart_item_text">Rp.350.000</div>
                   </div>
                   <div class="cart_item_total cart_info_col">
-                    <div class="cart_item_title" >Action</div>
-                    <a href="" class="btn btn-sm btn-danger" style="margin-top: 30px">x</a>
+                    <div class="cart_item_title text-center">Action</div>
+                    {{-- <a href="" class="btn btn-sm btn-danger" style="margin-top: 30px">x</a> --}}
+                    <button type="submit" class="btn btn-danger btn-md" style="margin-top:30px; display:inline;">x</button>
+                    <button type="submit" class="btn btn-success btn-md" style="margin-top:30px; display:inline;"><i class="fas fa-check-square"></i></button>
                   </div>
                 </div>
               </li>

@@ -33,17 +33,24 @@ class UserController extends Controller
     // $avatar = $request->avatar;
 
     if ($avatar) {
-      unlink($old_avatar);
-      $avatar_name = date('dmy_H_s_i');
-      $extension = strtolower($avatar->getClientOriginalExtension());
-      $avatar_full_name = $avatar_name . '.' . $extension;
-      $upload_path = 'media/profileUser/';
-      $image_url = $upload_path . $avatar_full_name;
-      $success = $avatar->move($upload_path, $avatar_full_name);
-      $data['avatar'] = $image_url;
-      // $avatar_name = hexdec(uniqid()) . '.' . $avatar->getClientOriginalExtension();
-      // Image::make($avatar)->resize(300, 300)->save('media/profileUser/' . $avatar_name);
-      // $data['avatar'] = 'media/profileUser/' . $avatar_name;
+      if ($old_avatar === null) {
+        $avatar_name = date('dmy_H_s_i');
+        $extension = strtolower($avatar->getClientOriginalExtension());
+        $avatar_full_name = $avatar_name . '.' . $extension;
+        $upload_path = 'media/profileUser/';
+        $image_url = $upload_path . $avatar_full_name;
+        $success = $avatar->move($upload_path, $avatar_full_name);
+        $data['avatar'] = $image_url;
+      } else {
+        unlink($old_avatar);
+        $avatar_name = date('dmy_H_s_i');
+        $extension = strtolower($avatar->getClientOriginalExtension());
+        $avatar_full_name = $avatar_name . '.' . $extension;
+        $upload_path = 'media/profileUser/';
+        $image_url = $upload_path . $avatar_full_name;
+        $success = $avatar->move($upload_path, $avatar_full_name);
+        $data['avatar'] = $image_url;
+      }
     }
 
     $update = DB::table('users')->where('id', $id)->update($data);

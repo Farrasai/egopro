@@ -16,46 +16,118 @@
 
       <!-- Selected Image -->
       <div class="col-lg-5 order-lg-2 order-1">
-        <div class="image_selected"><img src="{{ asset('frontend-theme/images/single_4.jpg') }}" alt=""></div>
+        <div class="image_selected"><img src="{{ asset($product->image) }}" alt=""></div>
       </div>
 
       <!-- Description -->
       <div class="col-lg-5 order-3">
         <div class="product_description">
-          <div class="product_category">Laptops</div>
-          <div class="product_name">MacBook Air 13</div>
-          <div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
-          <div class="product_text" style="color:#828282; font-weight: bold">
-            <label for="">Kualitas: </label>
-            <div class="badge badge-success">Baru</div>
+          <div class="product_category"><h5>{{ $product->category_name }}</h5></div>
+          <div class="product_name">{{ $product->product_name }}</div>
+          @if($product->jenis)
+            <div class="product_jenis">
+              <h4 class="badge progress-bar-success">
+                {{ $product->jenis }}
+              </h4>
+            </div>
+          @endif
+          <div class="product_text"><p>{{ $product->product_detail }}</p></div>
+          <div class="row">
+            <div class="col-4">
+              <div class="product_text" >
+                <label>Kualitas: </label>
+                <span class="badge progress-bar-success">Baru</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="product_text" >
+                <label>Stok Barang: </label>
+                <span class="badge progress-bar-success">{{ $product->product_quantity }} Barang</span>
+              </div>
+            </div>
+            <div class="col-2">
+            </div>
           </div>
           <div class="order_info d-flex flex-row" style="margin-top: 20px">
             <form action="#">
-              <div class="clearfix" style="z-index: 1000;">
-
-                <!-- Product Quantity -->
-                <div class="product_quantity clearfix">
-                  <span>Quantity: </span>
-                  <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-                  <div class="quantity_buttons">
-                    <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-                    <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+              <div class="row mt-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Tanggal Sewa</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="datetimepickerSewa">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-                
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Tanggal Pengembalian</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="datetimepickerPengembalian">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Jam Sewa</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="jamSewa">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Jam Pengembalian</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="jamPengembalian">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="product_price" style="margin-top: 35px">Rp.200.000 / Hari</div>
+              <div class="form-group">
+                <div class="row mt-2" >
+                  <div class="col-6">
+                    <label for="">Lama Sewa</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="lama" >
+                      <span class="input-group-addon" >
+                        <span class="glyphicon glyphicon-time"></span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Quantity</label>
+                        <input type="number" class="form-control" min="1" max="{{ $product->product_quantity }}" pattern="[0-9]" name="qty" value="1">
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product_price" style="margin-top: 35px">Rp.{{ $product->price }} / Hari</div>
               <div class="button_container">
                 <button type="button" class="button cart_button">Add to Cart</button>
                 <div class="product_fav"><i class="fas fa-heart"></i></div>
               </div>
-              
             </form>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
