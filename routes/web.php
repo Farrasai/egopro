@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.index');
-});
+})->name('index');
 
 Auth::routes(['verify' => true]);
 
 // User
 Route::get('/home', 'HomeController@index')->name('home.user');
+Route::get('/contact', 'ProductController@info')->name('info.user');
 Route::get('/user/logout', 'UserController@logout')->name('user.logout');
 // Ubah Password User
 Route::get('user/password', 'UserController@editPassword')->name('password.edit')->middleware('auth');

@@ -7,11 +7,11 @@
           <div class="logo_container">
             <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset('media/egopro/logo.png') }}" alt="" style="width: 300px; height: 80px;"></a></div>
           </div>
-          <div class="footer_title">Got Question? Call Us 24/7</div>
-          <div class="footer_phone">+38 068 005 3570</div>
+          <div class="footer_title">EGOPRO | Sewa Kamera Jogja / Jogja sewa kamera / Rental kamera sewa lensa</div>
+          <div class="footer_phone">085-70-2222-111</div>
           <div class="footer_contact_text">
-            <p>17 Princess Road, London</p>
-            <p>Grester London NW18JR, UK</p>
+            <p>Jl Candra Kirana no 14 Sagan</p>
+            <p>Terban, Yogyakarta, Indonesia</p>
           </div>
           <div class="footer_social">
             <ul>

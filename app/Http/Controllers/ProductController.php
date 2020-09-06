@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function info()
+    {
+        return view('pages.info.index');
+    }
+    
     public function product()
     {
         $products =  DB::table('products')->get();

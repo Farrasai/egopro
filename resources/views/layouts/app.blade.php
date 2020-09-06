@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OneTech</title>
+<title>EGOPRO | Sewa Kamera Jogja</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
@@ -67,13 +67,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
                   <div class="top_bar_icon">
                     <img src="{{asset('frontend-theme/images/phone.png')}}" alt="" />
                   </div>
-                  +38 068 005 3570
+                  +6285-70-2222-111
                 </div>
                 <div class="top_bar_contact_item">
                   <div class="top_bar_icon">
                     <img src="{{asset('frontend-theme/images/mail.png')}}" alt="" />
                   </div>
-                  <a href="mailto:test@gmail.com">test@gmail.com</a>
+                  <a href="mailto:egoprojogja@gmail.com">egoprojogja@gmail.com</a>
                 </div>
                 <div class="top_bar_content ml-auto">
                   <div class="top_bar_user">
