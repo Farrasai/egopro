@@ -27,6 +27,7 @@
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Admin Egopro</title>
 
@@ -35,6 +36,10 @@
     <link href="{{ asset('backend-theme/lib/Ionicons/css/ionicons.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/rickshaw/rickshaw.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/highlightjs/github.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet">
 
     {{-- Toaster --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -55,67 +60,39 @@
 
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
-        <a href="index.html" class="sl-menu-link active">
-          <div class="sl-menu-item">
+        <a href="{{ route('admin.index') }}" class="sl-menu-link" id="dashboard">
+          <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="widgets.html" class="sl-menu-link">
-          <div class="sl-menu-item">
+        <a href="{{ route('product.admin') }}" class="sl-menu-link" id="barang">
+          <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Daftar Barang</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
+        <a href="#" class="sl-menu-link" id="pelanggan">
+          <div class="sl-menu-item" >
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
             <span class="menu-item-label">Daftar Pelanggan</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-          <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-          <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
-        </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
+        <a href="#" class="sl-menu-link" id="transaksi">
+          <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
             <span class="menu-item-label">Transaksi</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-          <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-          <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-          <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-          <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
-        </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
+        <a href="#" class="sl-menu-link" id="laporan">
+          <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
             <span class="menu-item-label">Laporan</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-          <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
-          <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-          <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-          <li class="nav-item"><a href="icons.html" class="nav-link">Icons</a></li>
-          <li class="nav-item"><a href="modal.html" class="nav-link">Modal</a></li>
-          <li class="nav-item"><a href="navigation.html" class="nav-link">Navigation</a></li>
-          <li class="nav-item"><a href="pagination.html" class="nav-link">Pagination</a></li>
-          <li class="nav-item"><a href="popups.html" class="nav-link">Tooltip &amp; Popover</a></li>
-          <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
-          <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
-          <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
-        </ul>
       </div><!-- sl-sideleft-menu -->
 
       <br>
@@ -151,17 +128,19 @@
     </div><!-- sl-header -->
     <!-- ########## END: HEAD PANEL ########## -->
 
-
+    <script src="{{ asset('backend-theme/lib/jquery/jquery.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/popper.js/popper.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/bootstrap/bootstrap.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/jquery-ui/jquery-ui.js')}}"></script>
+    
 
     @endguest
     @yield('admin_content')
 
  
 
-    <script src="{{ asset('backend-theme/lib/jquery/jquery.js')}}"></script>
-    <script src="{{ asset('backend-theme/lib/popper.js/popper.js')}}"></script>
-    <script src="{{ asset('backend-theme/lib/bootstrap/bootstrap.js')}}"></script>
-    <script src="{{ asset('backend-theme/lib/jquery-ui/jquery-ui.js')}}"></script>
+    <!-- ########## END: MAIN PANEL ########## -->
+
     <script src="{{ asset('backend-theme/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/jquery.sparkline.bower/jquery.sparkline.min.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/d3/d3.js')}}"></script>
@@ -176,30 +155,37 @@
     <script src="{{ asset('backend-theme/js/ResizeSensor.js')}}"></script>
     <script src="{{ asset('backend-theme/js/dashboard.js')}}"></script>
 
+    <script src="{{ asset('backend-theme/lib/highlightjs/highlight.pack.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/datatables-responsive/dataTables.responsive.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/select2/js/select2.min.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.js')}}"></script>
     {{-- Toaster  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
-      @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}"
-        switch(type){
-          case 'info' :
-          toastr.info("{{ Session::get('message') }}")
-          break
-          
-          case 'success' :
-          toastr.success("{{ Session::get('message') }}")
-          break
-          
-          case 'warning' :
-          toastr.warning("{{ Session::get('message') }}")
-          break
-          
-          case 'error' :
-          toastr.error("{{ Session::get('message') }}")
-          break
-        }
-      @endif
+        $('.sl-menu-link').removeClass('active');
+        $('#dashboard').addClass('active');
+        @if(Session::has('message'))
+          var type = "{{ Session::get('alert-type', 'info') }}"
+          switch(type){
+            case 'info' :
+            toastr.info("{{ Session::get('message') }}")
+            break
+            
+            case 'success' :
+            toastr.success("{{ Session::get('message') }}")
+            break
+            
+            case 'warning' :
+            toastr.warning("{{ Session::get('message') }}")
+            break
+            
+            case 'error' :
+            toastr.error("{{ Session::get('message') }}")
+            break
+          }
+        @endif
       
     </script>
   </body>
