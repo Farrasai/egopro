@@ -199,49 +199,6 @@
             $('#gbr').html(' ' + fileName);
         });
 
-        $(".edit").click(function () {
-          $('#modaldemo2').modal('show');
-          var brgid = $(this).attr('data-id');
-          $.ajax({
-              type: "GET",
-              url: "{{url('/admin/product/edit')}}" + "/" + brgid,
-              dataType: "json",
-              success: function (data) {
-                console.log(data[0]);
-                  $('#baranged').val(data[0].product_name);
-                  $('#jenised').val(data[0].jenis);
-                  $('#kodeed').val(data[0].kode_barang);
-                  $('#hargaed').val(data[0].price);
-                  $('#stocked').val(data[0].product_quantity);
-                  $('#gbr').html(data[0].image.substr(16));
-                  $('#keteranganed').val(data[0].product_detail);
-              },
-              error: function() {
-                  alert("Error occured!!")
-              }
-          });
-        });
-
-        $(".del").click(function () {
-          Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-            }
-          })
-        });
-        
         $('#datatable1').DataTable({
           responsive: true,
           processing: true,
@@ -300,6 +257,53 @@
             }
           ]
         });
+
+        $('#datatable1').on('click', '.edit', function (e) { 
+          e.preventDefault();
+          $('#modaldemo2').modal('show');
+          var brgid = $(this).attr('data-id');
+          $.ajax({
+              type: "GET",
+              url: "{{url('/admin/product/edit')}}" + "/" + brgid,
+              dataType: "json",
+              success: function (data) {
+                console.log(data[0]);
+                  $('#baranged').val(data[0].product_name);
+                  $('#jenised').val(data[0].jenis);
+                  $('#kodeed').val(data[0].kode_barang);
+                  $('#hargaed').val(data[0].price);
+                  $('#stocked').val(data[0].product_quantity);
+                  $('#gbr').html(data[0].image.substr(16));
+                  $('#keteranganed').val(data[0].product_detail);
+              },
+              error: function() {
+                  alert("Error occured!!")
+              }
+          });
+        });
+
+        $('#datatable1').on('click', '.del', function (e) { 
+          e.preventDefault();
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+        });
+        
+        
 
         $('#datatable2').DataTable({
           bLengthChange: false,
