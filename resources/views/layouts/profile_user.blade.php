@@ -11,10 +11,14 @@
         <h5>{{ Auth::user()->name  }}</h5>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="{{ route('userProfile.edit') }}">Ubah Profile</a></li>
-        <li class="list-group-item"><a href="{{ route('password.edit') }}">Ubah Password</a></li>
-        <li class="list-group-item"><a href="{{ route('userSewa.edit') }}">Ubah Penyewaan</a></li>
+        {{-- @if($data) --}}
         <li class="list-group-item"><a href="{{ route('home.user') }}">Riwayat Sewa</a></li>
+        <li class="list-group-item"><a href="{{ route('userSewa.peminjaman') }}">Sewa Barang</a></li>
+        <li class="list-group-item"><a href="{{ route('userSewa.pengembalian') }}">Pengembalian Barang</a></li>
+        @if(Cart::instance(Auth::id())->count() > 0)
+          <li class="list-group-item"><a href="{{ route('show.cart') }}">Ubah Cart</a></li>
+        @endif
+        {{-- @endif --}}
       </ul>
       <div class="card-body">
         <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>

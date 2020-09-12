@@ -2,7 +2,6 @@
 @section('content')
 @include('layouts.menubar')
   <div class="contact_form" style="margin-top:-50px">
-
     <div class="container">
       <div class="row">
         <div class="col-lg-9 col-sm-12 card">
@@ -13,16 +12,16 @@
               <form action="{{ route('userProfile.update') }}" method="POST" enctype="multipart/form-data"> @csrf
                 <input type="hidden" name="id" value="{{ $data->id }}">
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-lg-4">
                       <h5 class="form-control-label text-center">Foto Profile</h5><br>
                       @if($data->avatar)
-                        <img id="img" src="{{ URL::to($data->avatar) }}" style="width: 220px; height:220px; margin-left:45px">
+                        <img id="img" src="{{ URL::to($data->avatar) }}" style="width: 220px; height:220px; margin-left:75px">
                       @else
-                        <img id="img" src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2"   style="width: 220px; height:220px; margin-left:45px">
+                        <img id="img" src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2"   style="width: 220px; height:220px; margin-left:75px">
                       @endif
                         <div class="form-group">
                           <label class="custom-file">
-                            <input type="file" id="file" class="custom-file-input" value="{{ $data->avatar }}" name="avatar" onchange="readURL(this)">
+                            <input type="file" id="file" class="custom-file-input" value="{{ $data->avatar }}" name="avatar" onchange="readURL(this)" style="margin-top: 10px">
                             <div style="margin-top: -25px">
                               <span class="custom-file-control"></span>
                               <input type="hidden" name="old_avatar" value="{{ $data->avatar }}" >
@@ -30,7 +29,7 @@
                           </label>
                       </div>                 
                   </div>
-                  <div class="col-7">
+                  <div class="col-lg-4">
                     <div class="form-group">
                       <label for="name">Nama</label>
                       <input type="text" name="name" id="name" class="form-control" value="{{ $data->name }}">
