@@ -161,6 +161,7 @@
 
             <div class="main_nav_menu ml-auto">
               <ul class="standard_dropdown main_nav_dropdown">
+              <li><a href="{{ route('index') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                 <li class="hassubs">
                   <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                   <ul>
@@ -178,8 +179,7 @@
                   </ul>
                 </li>
                 <li><a href="{{ route('all.product') }}">Product<i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="contact.html">Info<i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="{{ route('info.user') }}">Contact Info<i class="fas fa-chevron-down"></i></a></li>
               </ul>
             </div>
 
