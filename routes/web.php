@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.index');
-});
+})->name('index');
 
 Auth::routes(['verify' => true]);
 
 // User
 Route::get('/home', 'HomeController@index')->name('home.user');
+Route::get('/contact', 'ProductController@info')->name('info.user');
 Route::get('/user/logout', 'UserController@logout')->name('user.logout');
 // Ubah Password User
 Route::get('user/password', 'UserController@editPassword')->name('password.edit')->middleware('auth');
@@ -56,7 +57,7 @@ Route::post('product/checkout/final', 'CheckoutController@final')->name('final.c
 
 
 // Admin
-Route::get('dashboard', 'Admin\AdminController@index');
+Route::get('dashboard', 'Admin\AdminController@index')->name('admin.index');
 Route::get('admin/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin/login', 'Admin\Auth\LoginController@login');
 Route::get('admin/logout', 'Admin\AdminController@logout')->name('admin.logout');
@@ -64,3 +65,8 @@ Route::get('admin/logout', 'Admin\AdminController@logout')->name('admin.logout')
 Route::get('admin/edit/profile', 'Admin\AdminController@showEdit')->name('admin.edit');
 Route::post('admin/updateProfile', 'Admin\AdminController@updateProfile')->name('admin.update.profile');
 Route::post('admin/updatePassword', 'Admin\AdminController@updatePassword')->name('admin.password.update');
+
+//Product
+Route::get('admin/product', 'Admin\ProductController@index')->name('product.admin');
+Route::get('admin/product/edit/{id}', 'Admin\ProductController@edit')->name('admin.product.edit');
+Route::get('admin/product/serverside', 'Admin\ProductController@getAllProduct')->name('admin.product.get');

@@ -7,9 +7,13 @@
           <div class="logo_container">
             <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset('media/egopro/logo.png') }}" alt="" style="width: 300px; height: 80px;"></a></div>
           </div>
+
+          <div class="footer_title">EGOPRO | Sewa Kamera Jogja / Jogja sewa kamera / Rental kamera sewa lensa</div>
           <div class="footer_phone">085-70-2222-111</div>
           <div class="footer_contact_text">
-            <p>Jl Candra Kirana no 14 Sagan, Terban, Yogyakarta, Indonesia</p>
+            <p>Jl Candra Kirana no 14 Sagan</p>
+            <p>Terban, Yogyakarta, Indonesia</p>
+
           </div>
           <div class="footer_social">
             <ul>
