@@ -1,13 +1,6 @@
 @extends('layouts.app')
 @section('content')
 @php 
-  $sewa = DB::table('sewa')
-          ->join('peminjaman_barang', 'sewa.id', 'peminjaman_barang.sewaId')
-          ->join('pengembalian_barang', 'sewa.id', 'pengembalian_barang.sewaId')
-          ->where('sewa.userId', Auth::id())
-          ->orderBy('sewa.id', 'DESC')
-          ->get();
-  // dd($sewa);
   $no = 1;
 @endphp
 @include('layouts.menubar')
@@ -29,7 +22,7 @@
       <div class="row">
         <div class="col-9 card">
           <div class="card-title mt-4 text-center">
-            <h3>Riwayat Penyewaan</h3>
+            <h3>List Sewa Barang</h3>
           </div>
           <table class="table table-response mt-3">
             <thead>
@@ -37,21 +30,41 @@
                 <th scope="col">#</th>
                 <th scope="col">Kode Sewa</th>
                 <th scope="col">Tanggal Sewa</th>
-                <th scope="col">Tanggal Pengembalian</th>
+                <th scope="col">Jam Sewa</th>
                 <th scope="col">Total Biaya Sewa</th>
-                <th scope="col">Action</th>
+                <th scope="col">Status Sewa</th>
+                <th scope="col" class="text-center">Invoice</th>
+                <th scope="col" class="text-center">Bukti Pembayaran</th>
+
               </tr>
             </thead>
             <tbody>
-            @foreach($sewa as $row)
+            @foreach($peminjaman as $row)
+            {{-- @php
+            dd($row)
+            @endphp --}}
               <tr >
-                @if($row->status == 2)
+                @if($row->status == 1 || $row->status == 2)
                 <td scope="col" ><h5>{{ $no++ }}</h5></td>
                 <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
-                <td scope="col"><h5>{{ date('d-m-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
-                <td scope="col"><h5>{{ date('d-m-Y', strtotime($row->tanggalPengembalian))}}</h5></td>
+                <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
+                <td scope="col"><h5>{{ $row->jamPeminjaman }}</h5></td>
                 <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
-                <td scope="col"><a href="{{ url('user/riwyat-sewa/detail/'.$row->kodeSewa) }}" class="btn btn-primary btn-sm" >Detail</a></td>
+                <td scope="col">
+                  @if($row->status_peminjaman == 1)
+                  <div class="badge progress-bar-warning">Proses</div>
+                  @elseif($row->status_peminjaman == 2)
+                  <div class="badge progress-bar-info">Sewa</div>
+                  @endif
+                </td>
+                <td scope="col">
+                  <a href="{{ url('user/invoice/peminjaman/'.$row->id .'/' .$row->sewaId) }}" class="btn btn-primary btn-sm" style="margin-left:20px">Invoice</a>
+                </td>
+                <td>
+                  @if($row->pembayaran == 1 && $row->bukti_pembayaran === NULL)
+                  <a href="{{ url('user/uploadbukti/'.$row->kodeSewa) }}" class="btn btn-success btn-sm" style="margin-left:40px">Upload</a>
+                  @endif
+                </td>
                 @endif
               </tr>
             @endforeach

@@ -110,10 +110,10 @@
               <div class="product_border"></div>
               <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image) }} " style="height: 100px; widht:100px;"  alt=""></div>
               <div class="product_content">
-                <div class="product_price text-danger font-weight-bold">Rp.{{ $product->price }}</div>
+                <div class="product_price text-danger font-weight-bold">{{ rupiah($product->price) }}</div>
                 <div class="product_name" style="margin-top: -10px"><div><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}" tabindex="0">{{ $product->product_name }}</a></div></div>
               </div>
-              <div class="product_fav"><i class="fas fa-heart"></i></div>
+              {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
             </div>
             @endforeach
 

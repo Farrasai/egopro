@@ -1,5 +1,9 @@
 <?php
   $categories = DB::table('categories')->get();
+  $check = Auth::check();
+  if($check){
+    $idUser = Auth::user()->id;
+  }
 ?>
 <div class="header_main">
   <div class="container">
@@ -65,7 +69,7 @@
         <div
           class="wishlist_cart d-flex flex-row align-items-center justify-content-end"
         >
-          <div
+          {{-- <div
             class="wishlist d-flex flex-row align-items-center justify-content-end"
           >
             <div class="wishlist_icon">
@@ -75,7 +79,7 @@
               <div class="wishlist_text"><a href="#">Wishlist</a></div>
               <div class="wishlist_count">115</div>
             </div>
-          </div>
+          </div> --}}
 
           <!-- Cart -->
           @if(Auth::check())
@@ -85,12 +89,20 @@
             >
               <div class="cart_icon">
                 <img src="{{asset('frontend-theme/images/cart.png')}}" alt="" />
-                <div class="cart_count"><span>10</span></div>
+                @if(Auth::check())
+                  <div class="cart_count"><span>{{ Cart::instance($idUser)->count() }}</span></div>
+                @else
+                  <div class="cart_count"><span>0</span></div>
+                @endif
               </div>
           
               <div class="cart_content">
                 <div class="cart_text"><a href="{{ route('show.cart') }}">Cart</a></div>
-                <div class="cart_price">$85</div>
+                @if(Auth::check())
+                  <div class="cart_price">Rp.{{ Cart::instance($idUser)->subtotal() }}</div>
+                @else
+                  <div class="cart_price">Rp.0</div>
+                @endif
               </div>
             </div>
           </div>
@@ -310,13 +322,13 @@
                 <div class="menu_contact_icon">
                   <img src="{{asset('frontend-theme/images/phone_white.png')}}" alt="" />
                 </div>
-                +38 068 005 3570
+                085-70-2222-111
               </div>
               <div class="menu_contact_item">
                 <div class="menu_contact_icon">
                   <img src="{{asset('frontend-theme/images/mail_white.png')}}" alt="" />
                 </div>
-                <a href="mailto:test@gmail.com">test.com</a>
+                <a href="mailto:egoprojogja@gmail.com">egoprojogja@gmail.com</a>
               </div>
             </div>
           </div>

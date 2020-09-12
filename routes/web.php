@@ -28,20 +28,31 @@ Route::post('user/password', 'UserController@updatePassword')->name('password.up
 // Ubah profile User
 Route::get('user/edit/profile', 'UserController@editProfile')->name('userProfile.edit')->middleware('auth');
 Route::post('user/update/profile', 'UserController@updateProfile')->name('userProfile.update')->middleware('auth');
+
 // Ubah penyewaan User
 Route::get('user/edit/sewa', 'UserSewaController@editSewa')->name('userSewa.edit');
+Route::get('user/sewa/peminjaman', 'UserSewaController@peminjaman')->name('userSewa.peminjaman');
+Route::get('user/sewa/pengembalian', 'UserSewaController@pengembalian')->name('userSewa.pengembalian');
+Route::get('user/invoice/peminjaman/{id}/{sewaId}', 'UserSewaController@invoicePeminjaman')->name('invoice.peminjaman');
+Route::get('user/uploadbukti/{kodeSewa}', 'UserSewaController@showUploadBukti');
+Route::post('user/uploadbukti', 'UserSewaController@upload')->name('upload.bukti');
+Route::get('user/riwyat-sewa/detail/{kodeSewa}', 'UserSewaController@riwayatSewaDetail')->name('riwayat.detail');
+
 
 // All Product
 Route::get('allProduct', 'ProductController@product')->name('all.product');
-Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail');
-// Route::get('product/details/', 'ProductController@productDetail');
+Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail')->middleware('verified');
 
 // Add to Cart
+Route::post('add/to/cart/{id}', 'CartController@addCart')->name('addCart')->middleware('verified');
+Route::get('remove/cart/{rowId}', 'CartController@removeCart');
+Route::post('update/cart', 'CartController@updateCart')->name('update.cart');
+Route::get('checkCart', 'CartController@check');
 Route::get('product/cart', 'CartController@showCart')->name('show.cart');
 
-
-
-
+// Checkout
+Route::get('product/checkout', 'CheckoutController@checkout')->name('checkout');
+Route::post('product/checkout/final', 'CheckoutController@final')->name('final.checkout');
 
 
 // Admin

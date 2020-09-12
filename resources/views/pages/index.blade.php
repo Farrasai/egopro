@@ -2,9 +2,12 @@
 @section('content')
 @include('layouts.menubar')
 
-<?php
-  $products = DB::table('products')->get();
-?>
+@php
+  $cats = DB::table('categories')->first();
+  $catId = $cats->id;
+  $products = DB::table('products')->where('category_id', $catId)->limit(10)->orderBy('id','DESC')->get();
+
+@endphp
 
 <!-- Banner -->
 {{-- <div class="banner">
@@ -48,12 +51,13 @@
   </div>
 </div>
 
+
 <div class="viewed">
   <div class="container">
     <div class="row">
       <div class="col">
         <div class="viewed_title_container">
-          <h3 class="viewed_title">Recently Viewed</h3>
+          <h3 class="viewed_title">Category {{ $cats->category_name  }}</h3>
           <div class="viewed_nav_container">
             <div class="viewed_nav viewed_prev">
               <i class="fas fa-chevron-left"></i>
@@ -78,7 +82,7 @@
                   <img src="{{asset($product->image)}}" alt="" />
                 </div>
                 <div class="viewed_content text-center">
-                  <div class="viewed_price">Rp.{{$product->price}}</div>
+                  <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
                   </div>
