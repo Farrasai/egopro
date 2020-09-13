@@ -20,7 +20,7 @@
     @endif
     <div class="container">
       <div class="row">
-        <div class="col-9 card">
+        <div class="col-9 card  bg-light">
           <div class="card-title mt-4 text-center">
             <h3>List Sewa Barang</h3>
           </div>
@@ -35,6 +35,7 @@
                 <th scope="col">Status Sewa</th>
                 <th scope="col" class="text-center">Invoice</th>
                 <th scope="col" class="text-center">Bukti Pembayaran</th>
+                <th scope="col" class="text-center">Aksi</th>
 
               </tr>
             </thead>
@@ -66,10 +67,20 @@
                   @endif
                 </td>
                 @endif
+                <td>
+                  @if($row->status_peminjaman == 1)
+                  <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm">Ubah</a>
+                  <br>
+                  <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm">Batal</a>
+                  @endif
+                </td>
               </tr>
             @endforeach
             </tbody>
           </table>
+          <div class="pagination mt-5">
+            {{ $peminjaman->links() }}
+          </div>
         </div>
         @include('layouts.profile_user')
       </div>
@@ -77,8 +88,26 @@
     <div class="panel"></div>
   </div>
 @include('layouts.footer')
-<script>
-  $date = '09-08-2020';
-  alert($conv);
+<script src="{{asset('frontend-theme/js/jquery-3.3.1.min.js')}}"></script>
+<script>  
+  $(document).on("click", "#batalSewa", function(e){
+      e.preventDefault();
+      var link = $(this).attr("href");
+          swal({
+            title: "Anda yakin akan membatalkan sewa?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = link;
+            } else {
+              swal("Cancel");
+            }
+          });
+      });
 </script>
+
 @endsection

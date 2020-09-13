@@ -1,6 +1,6 @@
 
 <div class="col-lg-3 col-sm-12">
-  <div class="card">
+  <div class="card  bg-light">
     @if(!Auth::user()->avatar == NULL)
       <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
     @else

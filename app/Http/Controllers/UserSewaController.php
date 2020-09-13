@@ -22,7 +22,7 @@ class UserSewaController extends Controller
             ->where('sewa.userId', Auth::id())
             // ->where('sewa.status', 1 && 2)
             ->orderBy('sewa.id', 'DESC')
-            ->get();
+            ->paginate(5);
         return view('pages.sewa.peminjaman', compact('peminjaman'));
     }
 
@@ -62,7 +62,6 @@ class UserSewaController extends Controller
 
     public function showUploadBukti($kodeSewa)
     {
-
         $detailSewa = DB::table('sewa')->where('kodeSewa', $kodeSewa)->first();
         if ($detailSewa->pembayaran == 2 || $detailSewa->bukti_pembayaran) {
             return redirect()->back();
@@ -112,7 +111,85 @@ class UserSewaController extends Controller
             ->select('sewa.*', 'sewa_details.*', 'products.*')
             ->where('sewa.kodeSewa', $kodeSewa)
             ->get();
-        // dd($dataDetail);
         return view('pages.sewa.detailRiwayatSewa', compact('dataDetail'));
+    }
+
+    public function batalSewa($kodeSewa)
+    {
+        $sewaProduct = DB::table('sewa')
+            ->join('sewa_details', 'sewa.Id', 'sewa_details.sewaId')
+            ->select('sewa.*', 'sewa_details.*')
+            ->where('sewa.kodeSewa', $kodeSewa)
+            ->get();
+        foreach ($sewaProduct as $row) {
+            $product = DB::table('products')->where('id', $row->productId)->first();
+            $data['product_quantity'] = $product->product_quantity + $row->quantity;
+            DB::table('products')->where('id', $row->productId)->update($data);
+        }
+        DB::table('sewa')->where('kodeSewa', $kodeSewa)->delete();
+        $notification = array(
+            'message' => 'Berhasil membatalkan sewa',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }
+
+    public function showUbahSewa($kodeSewa)
+    {
+        $productSewa = DB::table('sewa')
+            ->join('peminjaman_barang', 'sewa.id', 'peminjaman_barang.sewaId')
+            ->join('pengembalian_barang', 'sewa.id', 'pengembalian_barang.sewaId')
+            ->where('sewa.kodeSewa', $kodeSewa)
+            ->get();
+        // dd($productSewa);
+        $barangSewa = DB::table('sewa')
+            ->join('sewa_details', 'sewa.id', 'sewa_details.sewaId')
+            ->join('products', 'sewa_details.productId', 'products.id')
+            ->where('sewa.kodeSewa', $kodeSewa)
+            ->get();
+        // dd($barangSewa);
+        return view('pages.sewa.ubahSewa', compact('productSewa', 'barangSewa'));
+    }
+
+    public function ubahSewa(Request $request)
+    {
+        $kodeSewa = $request->kodeSewa;
+        $getId = DB::table('sewa')->where('kodeSewa', $kodeSewa)->first();
+
+        // Table Sewa
+        $dataSewa = array();
+        $dataSewa['totalBiayaSewa'] = $request->total;
+        $dataSewa['pembayaran'] = $request->bayar;
+        DB::table('sewa')->where('kodeSewa', $kodeSewa)->update($dataSewa);
+
+
+        // Table Sewa Details
+        $dataSewaDetail = array();
+        $dataSewaDetail['tanggalSewa'] = $request->tanggalSewa;
+        $dataSewaDetail['tanggalPengembalian'] = $request->tanggalPengembalian;
+        $dataSewaDetail['lamaSewa'] = $request->lamaSewa;
+        $dataSewaDetail['jamSewa'] = $request->jamSewa;
+        $dataSewaDetail['jamPengembalian'] = $request->jamPengembalian;
+        DB::table('sewa_details')->where('sewaId', $getId->id)->update($dataSewaDetail);
+
+        // Table Peminjaman
+        $dataPeminjaman = array();
+        $dataPeminjaman['tanggalPeminjaman'] = $request->tanggalSewa;
+        $dataPeminjaman['jamPeminjaman'] = $request->jamSewa;
+        DB::table('peminjaman_barang')->where('sewaId', $getId->id)->update($dataPeminjaman);
+
+        // Table Pengembalian
+        $dataPengembalian = array();
+        $dataPengembalian['tanggalPengembalian'] = $request->tanggalPengembalian;
+        $dataPengembalian['jamPengembalian'] = $request->jamPengembalian;
+        DB::table('pengembalian_barang')->where('sewaId', $getId->id)->update($dataPengembalian);
+
+        $notification = array(
+            'message' => 'Berhasil mengubah sewa',
+            'alert-type' => 'success'
+        );
+        return redirect('user/sewa/peminjaman')->with($notification);
+
+        // dd($kodeSewa);
     }
 }

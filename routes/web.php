@@ -38,6 +38,10 @@ Route::get('user/invoice/peminjaman/{id}/{sewaId}', 'UserSewaController@invoiceP
 Route::get('user/uploadbukti/{kodeSewa}', 'UserSewaController@showUploadBukti');
 Route::post('user/uploadbukti', 'UserSewaController@upload')->name('upload.bukti');
 Route::get('user/riwyat-sewa/detail/{kodeSewa}', 'UserSewaController@riwayatSewaDetail')->name('riwayat.detail');
+Route::get('user/batal-sewa/{kodeSewa}', 'UserSewaController@batalSewa');
+Route::get('user/ubah-sewa/{kodeSewa}', 'UserSewaController@showUbahSewa');
+Route::post('user/ubah/sewa', 'UserSewaController@ubahSewa')->name('ubahSewa');
+
 
 
 // All Product

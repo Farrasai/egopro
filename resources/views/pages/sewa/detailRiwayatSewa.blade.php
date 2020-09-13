@@ -17,7 +17,7 @@
     @endif
     <div class="container">
       <div class="row">
-        <div class="col-12 card">
+        <div class="col-12 card bg-light">
           <div class="card-title mt-4 text-center">
             <h3>Detail Riwayat Sewa</h3>
           </div>

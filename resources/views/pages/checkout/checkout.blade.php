@@ -184,9 +184,10 @@
     var total = {{ $total_int }};
     if(konversiJangkaWaktu === 0){
       alert('Minimal 1 hari sewa');
+    }else if(isNaN(konversiJangkaWaktu )){
+      alert('Error');
     }else{
       totalTarif.value = 'Rp.' + numberWithCommas(konversiJangkaWaktu * total ) ;
-      // console.log(totalTarif.value);
     }
   })
 

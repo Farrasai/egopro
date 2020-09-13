@@ -6,8 +6,7 @@
           ->join('pengembalian_barang', 'sewa.id', 'pengembalian_barang.sewaId')
           ->where('sewa.userId', Auth::id())
           ->orderBy('sewa.id', 'DESC')
-          ->get();
-  // dd($sewa);
+          ->paginate(5);
   $no = 1;
 @endphp
 @include('layouts.menubar')
@@ -27,7 +26,7 @@
     @endif
     <div class="container">
       <div class="row">
-        <div class="col-9 card">
+        <div class="col-9 card  bg-light">
           <div class="card-title mt-4 text-center">
             <h3>Riwayat Penyewaan</h3>
           </div>
@@ -57,6 +56,9 @@
             @endforeach
             </tbody>
           </table>
+          <div class="pagination mt-5">
+            {{ $sewa->links() }}
+          </div>
         </div>
         @include('layouts.profile_user')
       </div>

@@ -25,7 +25,7 @@
     @endif
     <div class="container">
       <div class="row">
-        <div class="col-9 card">
+        <div class="col-9 card  bg-light">
           <div class="card-title mt-4 text-center">
             <h3>List Pengembalian Barang</h3>
           </div>
