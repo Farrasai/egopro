@@ -160,10 +160,16 @@
     <script src="{{ asset('backend-theme/lib/datatables-responsive/dataTables.responsive.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/select2/js/select2.min.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/parsleyjs/parsley.js')}}"></script>
     {{-- Toaster  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $('.sl-menu-link').removeClass('active');
         $('#dashboard').addClass('active');
         @if(Session::has('message'))

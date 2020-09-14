@@ -58,4 +58,8 @@ Route::post('admin/updatePassword', 'Admin\AdminController@updatePassword')->nam
 //Product
 Route::get('admin/product', 'Admin\ProductController@index')->name('product.admin');
 Route::get('admin/product/edit/{id}', 'Admin\ProductController@edit')->name('admin.product.edit');
+Route::get('admin/product/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.edit');
 Route::get('admin/product/serverside', 'Admin\ProductController@getAllProduct')->name('admin.product.get');
+Route::post('admin/product/tambah', 'Admin\ProductController@tambah')->name('admin.product.add');
+Route::get('admin/product/category', 'Admin\ProductController@getCategory')->name('admin.product.category');
+Route::post('admin/product/update', 'Admin\ProductController@update')->name('admin.product.update');

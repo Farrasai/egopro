@@ -46,62 +46,80 @@
                 </button>
               </div>
               <div class="modal-body pd-20">
-              <div class="form-layout">
-            <div class="row mg-b-25">
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="barang" placeholder="Nama Barang">
+            <form id="TambahForm" enctype="multipart/form-data">
+                <div class="form-layout">
+                  <div class="row mg-b-25">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="barang" id="barang" placeholder="Nama Barang" required>
+                      </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="jenis" id="jenis" placeholder="Jenis" required>
+                      </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Kode: <span class="tx-danger">*</span></label>
+                        <input class="form-control" readonly type="text" name="kode" id="kode" value="{{ $unikode }}" placeholder="Kode" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="harga" id="harga" placeholder="Harga" required>
+                      </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="stock" id="stock" placeholder="Stock" required>
+                      </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" id="gbr1">Gambar: <span class="tx-danger">*</span></label>
+                        <label class="custom-file">
+                          <input type="file" name="gambar" id="file1" class="custom-file-input" accept="image/*" required>
+                          <span class="custom-file-control custom-file-control-primary"></span>
+                        </label>
+                      </div>
+                    </div><!-- col-8 -->
+                    <div class="col-lg-6">
+                      <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Kategori: <span class="tx-danger">*</span></label>
+                        <select name="kategori" class="form-control select2" id="selectkategori" data-placeholder="Choose Barang" required>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Kualitas: <span class="tx-danger">*</span></label>
+                        <select name="kualitas" class="form-control select2" id="kualitas" data-placeholder="Choose Barang" required>
+                          <option value="Baru">Baru</option>
+                          <option value="Bekas">Bekas</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Keterangan: <span class="tx-danger">*</span></label>
+                        <textarea rows="4" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
+                      </div>
+                    </div><!-- col-8 -->
+                    
+                  </div><!-- row -->
                 </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="jenis"  placeholder="Jenis">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Kode: <span class="tx-danger">*</span></label>
-                  <input class="form-control" disabled type="text" name="kode" value="{{ $unikode }}" placeholder="Kode">
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" name="harga"  placeholder="Harga">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" name="stock"  placeholder="Stock">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label" id="gbr1">Gambar: <span class="tx-danger">*</span></label>
-                  <label class="custom-file">
-                    <input type="file" id="file1" class="custom-file-input" accept="image/*">
-                    <span class="custom-file-control custom-file-control-primary"></span>
-                  </label>
-                </div>
-              </div><!-- col-8 -->
-              <div class="col-lg-12">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Keterangan: <span class="tx-danger">*</span></label>
-                  <textarea rows="4" class="form-control" placeholder="Keterangan"></textarea>
-                </div>
-              </div><!-- col-8 -->
-              
-            </div><!-- row -->
-          </div>
-            </div><!-- modal-body -->
+              </div><!-- modal-body -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-info pd-x-20">Save changes</button>
-              <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-info pd-x-20" id="tambahbarang">Save changes</button>
+              <button type="button" class="btn btn-secondary pd-x-20" id="closemodal" data-dismiss="modal">Close</button>
             </div>
           </div>
+        </form>
         </div><!-- modal-dialog -->
       </div>
       <div id="modaldemo2" class="modal fade" style="display: none;" aria-hidden="true">
@@ -114,62 +132,80 @@
                 </button>
               </div>
               <div class="modal-body pd-20">
+            <form id="EditForm" enctype="multipart/form-data">
               <div class="form-layout">
-            <div class="row mg-b-25">
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" id="baranged" name="barang" placeholder="Nama Barang">
+                <div class="row mg-b-25">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                    <input class="form-control" type="hidden" id="barangid" name="barangid" placeholder="Nama Barang">
+                      <label class="form-control-label">Nama Barang: <span class="tx-danger">*</span></label>
+                      <input class="form-control" type="text" id="baranged" name="baranged" placeholder="Nama Barang">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
+                      <input class="form-control" type="text" id="jenised" name="jenised"  placeholder="Jenis">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label">Kode: <span class="tx-danger">*</span></label>
+                      <input class="form-control" readonly type="text" id="kodeed" name="kodeed"  placeholder="Kode">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
+                      <input class="form-control" type="number" id="hargaed" name="hargaed"  placeholder="Harga">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
+                      <input class="form-control" type="number" id="stocked" name="stocked"  placeholder="Stock">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" id="gbr">Gambar: </span></label>
+                      <label class="custom-file">
+                        <input name="gambared" type="file" id="file2" class="custom-file-input" accept="image/*">
+                        <span class="custom-file-control custom-file-control-primary"></span>
+                      </label>
+                    </div>
+                  </div><!-- col-8 -->
+                  <div class="col-lg-6">
+                      <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Kategori: <span class="tx-danger">*</span></label>
+                        <select name="kategoried" class="form-control select2" id="selectkategoried" data-placeholder="Choose Barang" required>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Kualitas: <span class="tx-danger">*</span></label>
+                        <select name="kualitased" class="form-control select2" id="kualitased" data-placeholder="Choose Barang" required>
+                          <option value="Baru">Baru</option>
+                          <option value="Bekas">Bekas</option>
+                        </select>
+                      </div>
+                    </div>
+                  <div class="col-lg-12">
+                    <div class="form-group mg-b-10-force">
+                      <label class="form-control-label">Keterangan: <span class="tx-danger">*</span></label>
+                      <textarea rows="4" class="form-control" id="keteranganed" name="keteranganed" placeholder="Keterangan"></textarea>
+                    </div>
+                  </div>    
+                </div><!-- row -->
+              </div>
+                </div><!-- modal-body -->
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info pd-x-20">Save changes</button>
+                  <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Jenis: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" id="jenised" name="jenis"  placeholder="Jenis">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Kode: <span class="tx-danger">*</span></label>
-                  <input class="form-control" disabled type="text" id="kodeed" name="kode"  placeholder="Kode">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" id="hargaed" name="harga"  placeholder="Harga">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" id="stocked" name="stock"  placeholder="Stock">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label" id="gbr">Gambar: <span class="tx-danger">*</span></label>
-                  <label class="custom-file">
-                    <input type="file" id="file2" class="custom-file-input" accept="image/*">
-                    <span class="custom-file-control custom-file-control-primary"></span>
-                  </label>
-                </div>
-              </div><!-- col-8 -->
-              <div class="col-lg-12">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Keterangan: <span class="tx-danger">*</span></label>
-                  <textarea rows="4" class="form-control" id="keteranganed" placeholder="Keterangan"></textarea>
-                </div>
-              </div><!-- col-8 -->
-              
-            </div><!-- row -->
-          </div>
-            </div><!-- modal-body -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-info pd-x-20">Save changes</button>
-              <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
-            </div>
-          </div>
+              </div>
+          </form>
         </div><!-- modal-dialog -->
       </div>
         </div><!-- sl-pagebody -->
@@ -193,13 +229,34 @@
         $('.sl-menu-link').removeClass('active');
         $('#barang').addClass('active');
 
+        $.ajax({
+            url: "{{url('/admin/product/category')}}",
+            dataType: 'json',
+            success: function (datas) {
+                var barang = $.map(datas, function (obj) {
+                    obj.id = obj.id || obj.id; // replace id_kab with your identifier
+                    obj.text = obj.text || obj.category_name;// replace nama with your identifier
+                    return obj;
+                });
+                $('#selectkategori').empty();
+                $('#selectkategoried').empty();
+                  $.each(barang, function(i, p) {
+                  $('#selectkategori').append($('<option></option>').val(p.id).html(p.category_name));
+                  $('#selectkategoried').append($('<option></option>').val(p.id).html(p.category_name));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("error");
+            }
+        });
+
         $('input[type="file"]').change(function(e){
             var fileName = e.target.files[0].name;
             $('#gbr1').html(' ' + fileName);
             $('#gbr').html(' ' + fileName);
         });
 
-        $('#datatable1').DataTable({
+        var bTable = $('#datatable1').DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
@@ -267,12 +324,14 @@
               url: "{{url('/admin/product/edit')}}" + "/" + brgid,
               dataType: "json",
               success: function (data) {
-                console.log(data[0]);
+                  $('#barangid').val(brgid);
                   $('#baranged').val(data[0].product_name);
                   $('#jenised').val(data[0].jenis);
                   $('#kodeed').val(data[0].kode_barang);
                   $('#hargaed').val(data[0].price);
                   $('#stocked').val(data[0].product_quantity);
+                  $('#selectkategoried').val(data[0].category_id);
+                  $('#kualitased').val(data[0].quality);
                   $('#gbr').html(data[0].image.substr(16));
                   $('#keteranganed').val(data[0].product_detail);
               },
@@ -280,10 +339,81 @@
                   alert("Error occured!!")
               }
           });
+
+          
+        });
+
+        $("#TambahForm").submit(function(e) {
+            e.preventDefault();    
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "{{url('/admin/product/tambah')}}",
+                data: formData,
+                success: function (data) {
+                  if (data.msg == 1) {
+                          Swal.fire(
+                          'Sukses!',
+                          'Data berhasil disimpan',
+                          'success'
+                        )
+                        $('#modaldemo3').modal('hide');
+                        bTable.ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    }
+                },
+                error: function() {
+                    alert("Error occured!!")
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+          
+        $("#EditForm").submit(function(e) {
+            e.preventDefault();    
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "{{url('/admin/product/update')}}",
+                data: formData,
+                success: function (data) {
+                  if (data.msg == 1) {
+                          Swal.fire(
+                          'Sukses!',
+                          'Data berhasil di edit',
+                          'success'
+                        )
+                        $('#modaldemo2').modal('hide');
+                        bTable.ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    }
+                },
+                error: function() {
+                    alert("Error occured!!")
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
         });
 
         $('#datatable1').on('click', '.del', function (e) { 
           e.preventDefault();
+          var brgid = $(this).attr('data-id');
           Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -294,11 +424,30 @@
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
+                $.ajax({
+                  type: "GET",
+                    url: "{{url('/admin/product/delete')}}" + "/" + brgid,
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.msg == '1') {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            bTable.ajax.reload();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!'
+                            })
+                        }
+                    },
+                    error: function() {
+                        alert("Error occured!!")
+                    }
+                })
             }
           })
         });
@@ -312,6 +461,8 @@
         });
 
         // Select2
+
+
         $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
 
       });

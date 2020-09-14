@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Facades\Cache;
 use DB;
+use Validator;
 use Auth;
 
 class ProductController extends Controller
@@ -44,6 +45,16 @@ class ProductController extends Controller
         return json_encode($productedit);
     }
 
+    public function delete($id) {
+        DB::table('products')->where('id', $id)->delete();
+        return response()->json(['msg'=>'1']);
+    }
+
+    public function getCategory() {
+        $categories =  DB::table('categories')->get();
+        return json_encode($categories);
+    }
+
     public function getAllProduct()
     {
         $data = DB::table('products')->get();
@@ -55,5 +66,96 @@ class ProductController extends Controller
             })
             ->rawColumns(['action'])
             ->make(true);
+    }
+
+    public function tambah(Request $request) 
+    {
+        $validator = Validator::make($request->all(), [
+            'barang' => 'required',
+            'jenis' => 'required',
+            'kode' => 'required',
+            'harga' => 'required',
+            'stock' => 'required',
+            'keterangan' => 'required',
+            'kategori' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if ($validator->passes()) {
+            $input = $request->all();
+            $file = $request->gambar->getClientOriginalName(); //Get Image Name
+            $input['gambar'] = $file;
+            $request->gambar->move(public_path('media/products/'), $input['gambar']);
+            DB::table('products')->insert([
+                'category_id' => $request->kategori,
+                'product_name' => $request->barang,
+                'jenis' => $request->jenis,
+                'kode_barang' => $request->kode,
+                'price' => $request->harga,
+                'product_quantity' => $request->stock,
+                'quality' => $request->kualitas,
+                'product_detail' => $request->keterangan,
+                'image' => 'media/products/' . $input['gambar']
+            ]);
+            
+            return response()->json(['msg'=>'1']);
+        }
+
+        return response()->json(['error'=>$validator->errors()->all()]);
+        
+    }
+
+    public function update(Request $request) 
+    {
+        $validator = Validator::make($request->all(), [
+            'barangid' => 'required',
+            'baranged' => 'required',
+            'jenised' => 'required',
+            'kodeed' => 'required',
+            'hargaed' => 'required',
+            'stocked' => 'required',
+            'keteranganed' => 'required',
+            'kategoried' => 'required',
+            'gambared' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if ($validator->passes()) {
+            $input = $request->all();
+            if(!empty($request->gambared)) {
+                $file = $request->gambared->getClientOriginalName(); //Get Image Name
+                $input['gambared'] = $file;
+                $request->gambared->move(public_path('media/products/'), $input['gambared']);
+                DB::table('products')->where('id', $request->barangid)->update([
+                    'category_id' => $request->kategoried,
+                    'product_name' => $request->baranged,
+                    'jenis' => $request->jenised,
+                    'kode_barang' => $request->kodeed,
+                    'price' => $request->hargaed,
+                    'product_quantity' => $request->stocked,
+                    'quality' => $request->kualitased,
+                    'product_detail' => $request->keteranganed,
+                    'image' => 'media/products/' . $input['gambared']
+                ]);
+                
+                return response()->json(['msg'=>'1']);
+            } else {
+                DB::table('products')->where('id', $request->barangid)->update([
+                    'category_id' => $request->kategoried,
+                    'product_name' => $request->baranged,
+                    'jenis' => $request->jenised,
+                    'kode_barang' => $request->kodeed,
+                    'price' => $request->hargaed,
+                    'product_quantity' => $request->stocked,
+                    'quality' => $request->kualitased,
+                    'product_detail' => $request->keteranganed
+                ]);
+                
+                return response()->json(['msg'=>'1']);
+            }
+            
+        }
+
+        return response()->json(['error'=>$validator->errors()->all()]);
+        
     }
 }
