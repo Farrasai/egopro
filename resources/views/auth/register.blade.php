@@ -4,7 +4,7 @@
 <div class="contact_form">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 offset-lg-1" style="border:1px solid gray; padding:20px; margin:auto">
+            <div class="card bg-light col-lg-5 offset-lg-1" style="padding:20px; margin:auto">
                 <div class="contact_form_container">
                     <div class="contact_form_title text-center">Sign Up</div>
                     <form method="POST" action="{{ route('register') }}">@csrf

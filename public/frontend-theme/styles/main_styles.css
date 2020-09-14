@@ -1195,6 +1195,7 @@ select option
 
 .banner
 {
+	margin-top: -15px;
 	width: 100%;
 	padding-top: 0px;
 	padding-bottom: 83px;

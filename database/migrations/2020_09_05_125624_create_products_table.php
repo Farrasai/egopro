@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('image');
             $table->string('product_detail');
+            $table->string('kode_barang');
             $table->timestamps();
         });
 
