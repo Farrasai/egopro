@@ -105,9 +105,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
           </div>
         </div>
         @yield('content')
-
-  
-      
     </div>
 
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Response;
 
 class UserSewaController extends Controller
 {
@@ -69,7 +70,11 @@ class UserSewaController extends Controller
             $harga_str = preg_replace("/[^0-9]/", "", $detailSewa->totalBiayaSewa);
             $bayarDP =  $harga_str / 2;
 
-            return view('pages.sewa.uploadBukti', compact('detailSewa', 'bayarDP'));
+            return response::json(array(
+                'detailSewa' => $detailSewa,
+                'bayarDP' => $bayarDP
+            ));
+            // return view('pages.sewa.uploadBukti', compact('detailSewa', 'bayarDP'));
         }
     }
 
@@ -111,7 +116,10 @@ class UserSewaController extends Controller
             ->select('sewa.*', 'sewa_details.*', 'products.*')
             ->where('sewa.kodeSewa', $kodeSewa)
             ->get();
-        return view('pages.sewa.detailRiwayatSewa', compact('dataDetail'));
+        // return view('pages.sewa.detailRiwayatSewa', compact('dataDetail'));
+        return response::json(array(
+            'dataDetail' => $dataDetail,
+        ));
     }
 
     public function batalSewa($kodeSewa)

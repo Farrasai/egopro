@@ -36,8 +36,8 @@ Route::get('user/sewa/peminjaman', 'UserSewaController@peminjaman')->name('userS
 Route::get('user/sewa/pengembalian', 'UserSewaController@pengembalian')->name('userSewa.pengembalian');
 Route::get('user/invoice/peminjaman/{id}/{sewaId}', 'UserSewaController@invoicePeminjaman')->name('invoice.peminjaman');
 Route::get('user/uploadbukti/{kodeSewa}', 'UserSewaController@showUploadBukti');
-Route::post('user/uploadbukti', 'UserSewaController@upload')->name('upload.bukti');
-Route::get('user/riwyat-sewa/detail/{kodeSewa}', 'UserSewaController@riwayatSewaDetail')->name('riwayat.detail');
+Route::post('user/upload/buktiPembayaran', 'UserSewaController@upload')->name('upload.bukti');
+Route::get('user/riwayat-sewa/detail/{kodeSewa}', 'UserSewaController@riwayatSewaDetail')->name('riwayat.detail');
 Route::get('user/batal-sewa/{kodeSewa}', 'UserSewaController@batalSewa');
 Route::get('user/ubah-sewa/{kodeSewa}', 'UserSewaController@showUbahSewa');
 Route::post('user/ubah/sewa', 'UserSewaController@ubahSewa')->name('ubahSewa');

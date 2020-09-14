@@ -63,7 +63,7 @@
                 </td>
                 <td>
                   @if($row->pembayaran == 1 && $row->bukti_pembayaran === NULL)
-                  <a href="{{ url('user/uploadbukti/'.$row->kodeSewa) }}" class="btn btn-success btn-sm" style="margin-left:40px">Upload</a>
+                  <button id="{{ $row->kodeSewa }}" type="button" class="btn btn-success btn-sm" style="margin-left:40px" data-toggle="modal" data-target="#uploadBukti" onclick="uploadBukti(this.id)" >Upload</button>
                   @endif
                 </td>
                 @endif
@@ -85,10 +85,79 @@
         @include('layouts.profile_user')
       </div>
     </div>
-    <div class="panel"></div>
+  <div class="panel"></div>
+</div>
+<div class="modal" id="uploadBukti" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered " role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="upload_bukti_form" method="POST" enctype="multipart/form-data" action="{{ route('upload.bukti') }}"> {{ csrf_field() }}
+          <div class="form-row">
+            <div class="col">
+              <label for="formGroupExampleInput">Kode Sewa </label>
+              <input type="text" id="kodeSewa" class="form-control"  name="kodeSewa" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col mt-3">
+              <label for="formGroupExampleInput">Nominal DP</label>
+              <input type="text" id="nominal_dp" class="form-control" name="nominal_dp" readonly>
+            </div>
+          </div>
+          <div class="form-group mt-5">
+            <label for="exampleFormControlFile1">Upload bukti pembayaran DP</label>
+            <input type="file" class="form-control-file" name="bukti_pembayaran" id="exampleFormControlFile1">
+          </div>
+          <button type="submit" class="btn btn-primary" id="uploadBtn">Upload</button>
+        </form>
+      </div>
+    </div>
   </div>
+</div>
 @include('layouts.footer')
 <script src="{{asset('frontend-theme/js/jquery-3.3.1.min.js')}}"></script>
+
+<script>
+  function uploadBukti(id){
+    function rupiah(angka){
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+    }
+    $.ajax({
+        url: '{{ url('/user/uploadbukti/') }}/'+id,
+        type: 'GET',
+        dataType: 'json',
+        cache:false,
+        success: function(data){
+          $('#kodeSewa').val(data.detailSewa.kodeSewa);
+          $('#nominal_dp').val(rupiah(data.bayarDP));
+        },
+    });
+  }
+
+</script>
+<script>
+  $("#uploadBtn").click(function () {
+    var postData = new FormData($("#upload_bukti_form")[0]);
+    $.ajax({
+        type:'POST',
+        url:'{{ url('/user/upload/buktiPembayaran') }}',
+        processData: false,
+        contentType: false,
+        data : postData,
+        success:function(data){
+          console.log("File Uploaded");
+        }
+      });
+  });
+</script>
 <script>  
   $(document).on("click", "#batalSewa", function(e){
       e.preventDefault();
