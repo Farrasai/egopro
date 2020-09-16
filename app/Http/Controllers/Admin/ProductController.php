@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 use DB;
 use Validator;
 use Auth;
@@ -20,7 +21,6 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products =  DB::table('products')->get();
         $last_row =  DB::table('products')->select('kode_barang')->orderBy('id', 'DESC')->first();
         
         $number = intval(substr($last_row->kode_barang,-1)) + 1;
@@ -37,7 +37,7 @@ class ProductController extends Controller
             $unikode = "BRG" . strval($number);
         }
 
-        return view('adminowner.product.index', compact('products', 'unikode'));
+        return view('adminowner.product.index', compact('unikode'));
     }
 
     public function edit($id) {
@@ -59,9 +59,12 @@ class ProductController extends Controller
     {
         $data = DB::table('products')->get();
         return Datatables::of($data)
+            ->editColumn("price", function ($data) {
+                return rupiah($data->price);
+            })
             ->addColumn('action', function ($data) {
-                $update = '<button class="btn btn-primary btn-icon mg-r-5 mg-b-10 edit" data-id="'. $data->id .'" id="edit"><div><i class="fa fa-pencil"></i></div></button>
-                <button class="btn btn-danger btn-icon mg-r-5 mg-b-10 del" data-id="'. $data->id .'"><div><i class="fa fa-trash"></i></div></button>';
+                $update = '<center><button class="btn btn-primary btn-icon mg-r-5 mg-b-10 edit" data-id="'. $data->id .'" id="edit"><div><i class="fa fa-pencil"></i></div></button>
+                <button class="btn btn-danger btn-icon mg-r-5 mg-b-10 del" data-id="'. $data->id .'"><div><i class="fa fa-trash"></i></div></button></center>';
                 return $update;
             })
             ->rawColumns(['action'])
@@ -95,13 +98,14 @@ class ProductController extends Controller
                 'product_quantity' => $request->stock,
                 'quality' => $request->kualitas,
                 'product_detail' => $request->keterangan,
-                'image' => 'media/products/' . $input['gambar']
+                'image' => 'media/products/' . $input['gambar'],
+                'created_at' => Carbon::now()->timestamp 
             ]);
             
             return response()->json(['msg'=>'1']);
         }
 
-        return response()->json(['error'=>$validator->errors()->all()]);
+        return response()->json(['error'=>$validator->errors()->all(),'msg'=>'0']);
         
     }
 
@@ -134,7 +138,8 @@ class ProductController extends Controller
                     'product_quantity' => $request->stocked,
                     'quality' => $request->kualitased,
                     'product_detail' => $request->keteranganed,
-                    'image' => 'media/products/' . $input['gambared']
+                    'image' => 'media/products/' . $input['gambared'],
+                    'updated_at' => Carbon::now()->timestamp 
                 ]);
                 
                 return response()->json(['msg'=>'1']);
@@ -147,7 +152,8 @@ class ProductController extends Controller
                     'price' => $request->hargaed,
                     'product_quantity' => $request->stocked,
                     'quality' => $request->kualitased,
-                    'product_detail' => $request->keteranganed
+                    'product_detail' => $request->keteranganed,
+                    'updated_at' => Carbon::now()->timestamp 
                 ]);
                 
                 return response()->json(['msg'=>'1']);

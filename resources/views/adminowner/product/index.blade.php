@@ -24,13 +24,13 @@
             <table id="datatable1" class="table table-hover table-bordered nowrap" style="width:100%">
               <thead class="bg-info">
                 <tr>
-                  <th class="wd-15p">Barang</th>
-                  <th class="wd-15p">Kode Barang</th>
-                  <th class="wd-20p">Nama Barang</th>
-                  <th class="wd-15p">Jenis</th>
-                  <th class="wd-10p">Harga</th>
-                  <th class="wd-25p">Stock</th>
-                  <th class="wd-25p">Aksi</th>
+                  <th>Barang</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Jenis</th>
+                  <th>Harga</th>
+                  <th>Stock</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
             </table>
@@ -168,7 +168,7 @@
                   </div><!-- col-4 -->
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <label class="form-control-label" id="gbr">Gambar: </span></label>
+                      <label class="form-control-label" id="gbr2">Gambar: </span></label>
                       <label class="custom-file">
                         <input name="gambared" type="file" id="file2" class="custom-file-input" accept="image/*">
                         <span class="custom-file-control custom-file-control-primary"></span>
@@ -250,10 +250,14 @@
             }
         });
 
-        $('input[type="file"]').change(function(e){
+        $('#file1').change(function(e){
             var fileName = e.target.files[0].name;
             $('#gbr1').html(' ' + fileName);
-            $('#gbr').html(' ' + fileName);
+        });
+
+        $('#file2').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('#gbr2').html(' ' + fileName);
         });
 
         var bTable = $('#datatable1').DataTable({
@@ -265,6 +269,7 @@
             searchPlaceholder: 'Search...',
             sSearch: '',
             lengthMenu: '_MENU_ items/page',
+            processing: '<br><br><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span>Loading...</span>',
           },
           columns: 
           [

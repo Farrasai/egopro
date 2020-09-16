@@ -4,13 +4,40 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+use DataTables;
 use Auth;
 use Hash;
 use DB;
+use Validator;
 use Image;
 
 class UserController extends Controller
 {
+
+  public function index()
+  {
+    return view('adminowner.user.index');
+  }
+
+  public function getAllUser()
+  {
+      $data = DB::table('users')->get();
+      return Datatables::of($data)
+        ->addColumn('action', function ($data) {
+            $update = '<center><button class="btn btn-primary btn-icon mg-r-5 mg-b-10 edit" data-id="'. $data->id .'" id="edit"><div><i class="fa fa-pencil"></i></div></button>
+            <button class="btn btn-danger btn-icon mg-r-5 mg-b-10 del" data-id="'. $data->id .'"><div><i class="fa fa-trash"></i></div></button></center>';
+            return $update;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+  }
+
+  public function edit($id) {
+    $useredit =  DB::table('users')->where('id', $id)->get();
+    return json_encode($useredit);
+  }
 
   public function editProfile()
   {
@@ -18,6 +45,11 @@ class UserController extends Controller
     $data = DB::table('users')->where('id', $id)->first();
     return view('pages.profile.editProfile', compact('data'));
   }
+
+  public function delete($id) {
+    DB::table('users')->where('id', $id)->delete();
+    return response()->json(['msg'=>'1']);
+}
 
   public function updateProfile(Request $request)
   {
@@ -32,7 +64,7 @@ class UserController extends Controller
     // $data['avatar'] = $request->avatar;
     // $avatar = $request->avatar;
 
-    if ($avatar) {
+    if (!empty($avatar)) {
       if ($old_avatar === null) {
         $avatar_name = date('dmy_H_s_i');
         $extension = strtolower($avatar->getClientOriginalExtension());
@@ -69,6 +101,81 @@ class UserController extends Controller
     }
   }
 
+  public function tambah(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'nama' => 'required',
+      'email' => 'required',
+      'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'nohp' => 'required',
+      'pass' => 'required|string|min:8',
+      'alamat' => 'required' 
+    ]);
+
+    if ($validator->passes()) {
+
+      $data['name'] = $request->nama;
+      $data['email'] = $request->email;
+      $avatar = $request->avatar; 
+      $avatar_name = date('dmy_H_s_i');
+      $extension = strtolower($avatar->getClientOriginalExtension());
+      $avatar_full_name = $avatar_name . '.' . $extension;
+      $upload_path = 'media/profileUser/';
+      $image_url = $upload_path . $avatar_full_name;
+      $success = $avatar->move($upload_path, $avatar_full_name);
+      $data['avatar'] = $image_url;
+      $data['nohp'] = $request->nohp;
+      $data['password'] = bcrypt($request->pass);
+      $data['address'] = $request->alamat;
+      $update = DB::table('users')->insert($data);
+      return response()->json(['msg'=>'1']);
+    }
+    return response()->json(['error'=>$validator->errors()->all(),'msg'=>'0']);
+  }
+
+  public function update(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'iduser' => 'required',
+      'namaed' => 'required',
+      'emailed' => 'required',
+      'avatared' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'nohped' => 'required',
+      'passed' => 'string|min:8',
+      'alamated' => 'required'    
+    ]);
+
+    if ($validator->passes()) {
+      $id = $request->iduser;
+      
+      $data['name'] = $request->namaed;
+      $data['email'] = $request->emailed;
+
+      if (!empty($request->avatared)) {
+        $avatar = $request->avatared; 
+          $avatar_name = date('dmy_H_s_i');
+          $extension = strtolower($avatar->getClientOriginalExtension());
+          $avatar_full_name = $avatar_name . '.' . $extension;
+          $upload_path = 'media/profileUser/';
+          $image_url = $upload_path . $avatar_full_name;
+          $success = $avatar->move($upload_path, $avatar_full_name);
+          $data['avatar'] = $image_url;
+          $data['nohp'] = $request->nohped;
+          if(!empty($request->passed)) {
+             $data['password'] = bcrypt($request->passed);
+          }
+          $data['address'] = $request->alamated;
+          $update = DB::table('users')->where('id', $id)->update($data);
+          return response()->json(['msg'=>'1']);
+      } else {
+          $data['nohp'] = $request->nohped;
+          $data['address'] = $request->alamated;
+          $update = DB::table('users')->where('id', $id)->update($data);
+          return response()->json(['msg'=>'1']);
+      }
+    }
+    return response()->json(['error'=>$validator->errors()->all()]);
+  }
 
 
   public function editPassword()
