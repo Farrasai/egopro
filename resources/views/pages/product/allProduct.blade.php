@@ -5,7 +5,7 @@
   <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
   <div class="home_overlay"></div>
   <div class="home_content d-flex flex-column align-items-center justify-content-center">
-    <h2 class="home_title">Smartphones & Tablets</h2>
+    <h2 class="home_title">All Products</h2>
   </div>
 </div>
 
@@ -21,18 +21,12 @@
           <div class="sidebar_section">
             <div class="sidebar_title">Categories</div>
             <ul class="sidebar_categories">
-              <li><a href="#">Computers & Laptops</a></li>
-              <li><a href="#">Cameras & Photos</a></li>
-              <li><a href="#">Hardware</a></li>
-              <li><a href="#">Smartphones & Tablets</a></li>
-              <li><a href="#">TV & Audio</a></li>
-              <li><a href="#">Gadgets</a></li>
-              <li><a href="#">Car Electronics</a></li>
-              <li><a href="#">Video Games & Consoles</a></li>
-              <li><a href="#">Accessories</a></li>
+              @foreach ($categories as $category)
+              <li><a href="{{ url('products/'.$category->id) }}">{{ $category->category_name }}</a></li>
+              @endforeach
             </ul>
           </div>
-          <div class="sidebar_section">
+          {{-- <div class="sidebar_section">
             <div class="sidebar_subtitle brands_subtitle">Brands</div>
             <ul class="brands_list">
               <li class="brand"><a href="#">Apple</a></li>
@@ -44,7 +38,7 @@
               <li class="brand"><a href="#">Sony</a></li>
               <li class="brand"><a href="#">Xiaomi</a></li>
             </ul>
-          </div>
+          </div> --}}
         </div>
 
       </div>
@@ -55,8 +49,9 @@
 
         <div class="shop_content">
           <div class="shop_bar clearfix">
-            <div class="shop_product_count"><span>186</span> products found</div>
-            <div class="shop_sorting">
+            <h5>All Products</h5>
+            {{-- <div class="shop_product_count"><span>186</span> products found</div> --}}
+            {{-- <div class="shop_sorting">
               <span>Sort by:</span>
               <ul>
                 <li>
@@ -68,7 +63,7 @@
                   </ul>
                 </li>
               </ul>
-            </div>
+            </div> --}}
           </div>
 
           <div class="product_grid">
@@ -195,15 +190,7 @@
 
           <!-- Shop Page Navigation -->
           <div class="shop_page_nav d-flex flex-row">
-            <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
-            <ul class="page_nav d-flex flex-row">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">...</a></li>
-              <li><a href="#">21</a></li>
-            </ul>
-            <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+            {{ $products->links() }}
           </div>
         </div>
       </div>

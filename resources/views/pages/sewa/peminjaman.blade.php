@@ -32,6 +32,7 @@
                 <th scope="col">Tanggal Sewa</th>
                 <th scope="col">Jam Sewa</th>
                 <th scope="col">Total Biaya Sewa</th>
+                <th scope="col">Keterangan</th>
                 <th scope="col">Status Sewa</th>
                 <th scope="col" class="text-center">Invoice</th>
                 <th scope="col" class="text-center">Bukti Pembayaran</th>
@@ -51,6 +52,7 @@
                 <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
                 <td scope="col"><h5>{{ $row->jamPeminjaman }}</h5></td>
                 <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
+                <td scope="col"><h5>{{ $row->keterangan }}</h5></td>
                 <td scope="col">
                   @if($row->status_peminjaman == 1)
                   <div class="badge progress-bar-warning">Proses</div>
@@ -144,7 +146,7 @@
 
 </script>
 <script>
-  $("#uploadBtn").click(function () {
+$("#uploadBtn").click(function () {
     var postData = new FormData($("#upload_bukti_form")[0]);
     $.ajax({
         type:'POST',

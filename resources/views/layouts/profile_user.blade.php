@@ -13,7 +13,7 @@
       <ul class="list-group list-group-flush">
         {{-- @if($data) --}}
         <li class="list-group-item"><a href="{{ route('home.user') }}">Riwayat Sewa</a></li>
-        <li class="list-group-item"><a href="{{ route('userSewa.peminjaman') }}">Sewa Barang</a></li>
+        <li class="list-group-item"><a href="{{ route('userSewa.peminjaman') }}">Peminjaman Barang</a></li>
         <li class="list-group-item"><a href="{{ route('userSewa.pengembalian') }}">Pengembalian Barang</a></li>
         @if(Cart::instance(Auth::id())->count() > 0)
           <li class="list-group-item"><a href="{{ route('show.cart') }}">Ubah Cart</a></li>

@@ -20,8 +20,8 @@ class CreateSewaTable extends Migration
             $table->string('totalBiayaSewa');
             $table->string('pembayaran');
             $table->string('status');
-            $table->string('bukti_pembayaran');
-            $table->string('nominal_DP');
+            $table->string('bukti_pembayaran')->nullable();
+            $table->string('nominal_DP')->nullable();
             $table->timestamps();
         });
     }
