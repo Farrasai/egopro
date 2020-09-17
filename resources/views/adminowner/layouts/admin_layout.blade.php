@@ -68,28 +68,31 @@
         </a><!-- sl-menu-link -->
         <a href="{{ route('product.admin') }}" class="sl-menu-link" id="barang">
           <div class="sl-menu-item" >
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+            <i class="menu-item-icon icon ion-ios-camera-outline tx-20"></i>
             <span class="menu-item-label">Daftar Barang</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <a href="{{ route('user.admin') }}" class="sl-menu-link" id="pelanggan">
           <div class="sl-menu-item" >
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <i class="menu-item-icon ion-ios-person-outline tx-20"></i>
             <span class="menu-item-label">Daftar Pelanggan</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link" id="transaksi">
-          <div class="sl-menu-item" >
-            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-cart-outline tx-24"></i>
             <span class="menu-item-label">Transaksi</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="form-elements.html" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
+          <li class="nav-item"><a href="form-layouts.html" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
+        </ul>
         <a href="#" class="sl-menu-link" id="laporan">
           <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
             <span class="menu-item-label">Laporan</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
       </div><!-- sl-sideleft-menu -->

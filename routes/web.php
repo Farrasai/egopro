@@ -86,3 +86,6 @@ Route::get('admin/user/delete/{id}', 'UserController@delete')->name('admin.user.
 Route::get('admin/user/serverside', 'UserController@getAllUser')->name('admin.user.get')->middleware('auth:admin');
 Route::post('admin/user/tambah', 'UserController@tambah')->name('admin.user.add')->middleware('auth:admin');
 Route::post('admin/user/update', 'UserController@update')->name('admin.user.update')->middleware('auth:admin');
+
+//Transaksi
+Route::get('admin/transaksi/penyewaan', 'Admin\TransaksiController@pemesananIndex')->name('pemesanan.admin');
