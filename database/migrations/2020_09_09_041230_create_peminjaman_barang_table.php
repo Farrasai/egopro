@@ -20,6 +20,7 @@ class CreatePeminjamanBarangTable extends Migration
             $table->string('tanggalPeminjaman');
             $table->string('jamPeminjaman');
             $table->string('status_peminjaman')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

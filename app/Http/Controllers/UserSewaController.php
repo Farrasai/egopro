@@ -19,7 +19,7 @@ class UserSewaController extends Controller
     {
         $peminjaman = DB::table('sewa')
             ->join('peminjaman_barang', 'sewa.id', 'peminjaman_barang.sewaId')
-            ->select('sewa.*', 'peminjaman_barang.tanggalPeminjaman', 'peminjaman_barang.jamPeminjaman', 'peminjaman_barang.sewaId', 'peminjaman_barang.status_peminjaman')
+            ->select('sewa.*', 'peminjaman_barang.tanggalPeminjaman', 'peminjaman_barang.jamPeminjaman', 'peminjaman_barang.sewaId', 'peminjaman_barang.status_peminjaman', 'peminjaman_barang.keterangan')
             ->where('sewa.userId', Auth::id())
             // ->where('sewa.status', 1 && 2)
             ->orderBy('sewa.id', 'DESC')

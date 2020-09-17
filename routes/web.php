@@ -47,6 +47,8 @@ Route::post('user/ubah/sewa', 'UserSewaController@ubahSewa')->name('ubahSewa');
 // All Product
 Route::get('allProduct', 'ProductController@product')->name('all.product');
 Route::get('product/details/{id}/{product_name}', 'ProductController@productDetail')->middleware('verified');
+Route::get('products/{id}', 'ProductController@productByCategories');
+Route::post('product/search', 'ProductController@search')->name('products.search');
 
 // Add to Cart
 Route::post('add/to/cart/{id}', 'CartController@addCart')->name('addCart')->middleware('verified');

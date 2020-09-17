@@ -56,13 +56,17 @@ class UserController extends Controller
     $id = $request->id;
     $old_avatar = $request->old_avatar;
 
+    $request->validate([
+      'noIdentitas' => 'required|unique:users|min:16|max:16',
+      'nohp' => 'string|min:11|max:13'
+    ]);
+
     $data['name'] = $request->name;
+    $data['noIdentitas'] = $request->noIdentitas;
     $data['email'] = $request->email;
     $data['address'] = $request->address;
     $data['nohp'] = $request->nohp;
     $avatar = $request->file('avatar');
-    // $data['avatar'] = $request->avatar;
-    // $avatar = $request->avatar;
 
     if (!empty($avatar)) {
       if ($old_avatar === null) {
