@@ -90,4 +90,7 @@ Route::post('admin/user/tambah', 'UserController@tambah')->name('admin.user.add'
 Route::post('admin/user/update', 'UserController@update')->name('admin.user.update')->middleware('auth:admin');
 
 //Transaksi
-Route::get('admin/transaksi/penyewaan', 'Admin\TransaksiController@pemesananIndex')->name('pemesanan.admin');
+Route::get('admin/transaksi/pengambilan', 'Admin\TransaksiController@pemesananIndex')->name('pemesanan.admin');
+Route::get('admin/transaksi/pengambilan/serverside', 'Admin\TransaksiController@getPemesanan')->name('admin.pemesanan.get');
+Route::get('admin/transaksi/pengambilan/detail/{id}', 'Admin\TransaksiController@detail')->name('admin.pemesanan.detail');
+Route::get('admin/transaksi/pengambilan/acc/{id}', 'Admin\TransaksiController@acc')->name('admin.pemesanan.acc');

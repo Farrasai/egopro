@@ -86,7 +86,7 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="form-elements.html" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
+          <li class="nav-item"><a href="{{ route('pemesanan.admin') }}" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
           <li class="nav-item"><a href="form-layouts.html" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
         </ul>
         <a href="#" class="sl-menu-link" id="laporan">

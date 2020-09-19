@@ -99,7 +99,7 @@ class ProductController extends Controller
                 'quality' => $request->kualitas,
                 'product_detail' => $request->keterangan,
                 'image' => 'media/products/' . $input['gambar'],
-                'created_at' => Carbon::now()->timestamp 
+                'created_at' => Carbon::now()
             ]);
             
             return response()->json(['msg'=>'1']);
@@ -139,7 +139,7 @@ class ProductController extends Controller
                     'quality' => $request->kualitased,
                     'product_detail' => $request->keteranganed,
                     'image' => 'media/products/' . $input['gambared'],
-                    'updated_at' => Carbon::now()->timestamp 
+                    'updated_at' => Carbon::now()
                 ]);
                 
                 return response()->json(['msg'=>'1']);
@@ -153,7 +153,7 @@ class ProductController extends Controller
                     'product_quantity' => $request->stocked,
                     'quality' => $request->kualitased,
                     'product_detail' => $request->keteranganed,
-                    'updated_at' => Carbon::now()->timestamp 
+                    'updated_at' => Carbon::now()
                 ]);
                 
                 return response()->json(['msg'=>'1']);

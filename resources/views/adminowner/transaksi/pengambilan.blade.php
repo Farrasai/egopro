@@ -24,6 +24,7 @@
                 <tr>
                   <th>Kode Invoice</th>
                   <th>Nama</th>
+                  <th>No Identitas</th>
                   <th>No HP</th>
                   <th>Jam Ambil</th>
                   <th>Tanggal Ambil</th>
@@ -35,7 +36,7 @@
           </div><!-- table-wrapper -->
         </div><!-- card -->
       <div id="modaldemo2" class="modal fade" style="display: none;" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog" style="max-width: 70vw;" role="document">
             <div class="modal-content tx-size-sm">
               <div class="modal-header pd-x-20">
                 <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Detail Pengambilan</h6>
@@ -44,11 +45,76 @@
                 </button>
             </div>
             <div class="modal-body pd-25">
-                <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Why We Use Electoral College, Not Popular Vote</a></h4>
-                <p class="mg-b-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+                <table>
+                    <tr>
+                        <td style="width: 30%;"><h5 class="lh-3">Kode Invoice</h5></td>
+                        <td><h5 class="lh-3" id="kodesewa"></h5></td>
+                    </tr>
+                    <tr>
+                        <td><p class="mg-b-5">Nama Penyewa</td>
+                        <td class="reset" id="namaUser">:</td>
+                    </tr>
+                    <tr>
+                        <td>No Identitas</td>
+                        <td class="reset" id="noIdentitas">:</td>
+                    </tr>
+                    <tr>
+                        <td>No Handphone</td>
+                        <td class="reset" id="nohp">:</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;text-align: left;">Alamat Lengkap</td>
+                        <td class="reset" id="alamat"></td>
+                    </tr>
+                    <tr>
+                        <td>Jam Ambil</td>
+                        <td class="reset" id="jamAmbil">:</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Ambil</td>
+                        <td class="reset" id="tglAmbil">:</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Kembali</td>
+                        <td class="reset" id="tglKembali">:</td></p>
+                    </tr>
+                    <tr>
+                        <td>Total Biaya Sewa</td>
+                        <td class="reset" id="biayaSewa">:</td></p>
+                    </tr>
+                    <tr>
+                        <td>Pembayaran</td>
+                        <td class="reset" id="pembayaran">:</td></p>
+                    </tr>
+                    <tr>
+                        <td id="resetdp">Nominal DP</td>
+                        <td class="reset" id="dp">:</td></p>
+                    </tr>
+                    <tr>
+                        <td id="resetbukti">Bukti Pembayaran</td>
+                        <td class="reset" id="bukti">:</td></p>
+                    </tr>
+                </table>
+                <br><br>
+                <h5 class="lh-3">Data Sewa Barang</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-primary mg-b-0" id="myTable">
+                    <thead>
+                        <tr>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah Sewa</th>
+                        <th>Harga Sewa</th>
+                        <th>SubHarga Sewa</th>
+                        </tr>
+                    </thead>
+                      <tr>
+                        <td colspan="5"><center>Data Tidak Ditemukan</center></td>
+                      </tr>
+                    </table>
+                </div>
             </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info pd-x-20">Save changes</button>
                     <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -73,44 +139,20 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('.sl-menu-link').removeClass('active');
-        $('#barang').addClass('active');
+        $('#transaksi1').addClass('active');
 
-        $.ajax({
-            url: "{{url('/admin/product/category')}}",
-            dataType: 'json',
-            success: function (datas) {
-                var barang = $.map(datas, function (obj) {
-                    obj.id = obj.id || obj.id; // replace id_kab with your identifier
-                    obj.text = obj.text || obj.category_name;// replace nama with your identifier
-                    return obj;
-                });
-                $('#selectkategori').empty();
-                $('#selectkategoried').empty();
-                  $.each(barang, function(i, p) {
-                  $('#selectkategori').append($('<option></option>').val(p.id).html(p.category_name));
-                  $('#selectkategoried').append($('<option></option>').val(p.id).html(p.category_name));
-                });
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert("error");
-            }
-        });
-
-        $('#file1').change(function(e){
-            var fileName = e.target.files[0].name;
-            $('#gbr1').html(' ' + fileName);
-        });
-
-        $('#file2').change(function(e){
-            var fileName = e.target.files[0].name;
-            $('#gbr2').html(' ' + fileName);
-        });
+        function rupiah(angka){
+          var rupiah = '';		
+          var angkarev = angka.toString().split('').reverse().join('');
+          for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+          return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
 
         var bTable = $('#datatable1').DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
-          ajax: "/admin/product/serverside",
+          ajax: "/admin/transaksi/pengambilan/serverside",
           language: {
             searchPlaceholder: 'Search...',
             sSearch: '',
@@ -120,42 +162,44 @@
           columns: 
           [
             {
-              "name": "image",
-              "data": "image",
-              "render": function (data, type, full, meta) {
-                  return "<img src=\"" + "../" + data + "\" height=\"100\"/>";
-              },
-              "title": "Image",
+              "data": 'kodeSewa',
+              "name": 'kodeSewa',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'kode_barang',
-              "name": 'kode_barang',
+              "data": 'name',
+              "name": 'name',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'product_name',
-              "name": 'product_name',
+              "data": 'noIdentitas',
+              "name": 'noIdentitas',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'jenis',
-              "name": 'jenis',
+              "data": 'nohp',
+              "name": 'nohp',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'price',
-              "name": 'price',
+              "data": 'jamPeminjaman',
+              "name": 'jamPeminjaman',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'product_quantity',
-              "name": 'product_quantity',
+              "data": 'tanggalPeminjaman',
+              "name": 'tanggalPeminjaman',
+              "orderable": true,
+              "searchable": true
+            },
+            {
+              "data": 'tanggalPengembalian',
+              "name": 'tanggalPengembalian',
               "orderable": true,
               "searchable": true
             },
@@ -166,81 +210,73 @@
           ]
         });
 
-        $('#datatable1').on('click', '.edit', function (e) { 
+        $('#datatable1').on('click', '.detail', function (e) { 
           e.preventDefault();
-          $('#modaldemo2').modal('show');
-          var brgid = $(this).attr('data-id');
+          var sewaid = $(this).attr('data-id');
           $.ajax({
               type: "GET",
-              url: "{{url('/admin/product/edit')}}" + "/" + brgid,
+              url: "{{url('/admin/transaksi/pengambilan/detail')}}" + "/" + sewaid,
               dataType: "json",
+              beforeSend: function(){
+                Swal.fire({
+                  html: '<br><br><i class="fa fa-circle-o-notch fa-spin" style="font-size:100px"></i><br><br>',
+                  showConfirmButton: false
+                })
+              },
+              complete: function(){
+                Swal.close();
+                $('#modaldemo2').modal('show');
+              },
               success: function (data) {
-                  $('#barangid').val(brgid);
-                  $('#baranged').val(data[0].product_name);
-                  $('#jenised').val(data[0].jenis);
-                  $('#kodeed').val(data[0].kode_barang);
-                  $('#hargaed').val(data[0].price);
-                  $('#stocked').val(data[0].product_quantity);
-                  $('#selectkategoried').val(data[0].category_id);
-                  $('#kualitased').val(data[0].quality);
-                  $('#gbr').html(data[0].image.substr(16));
-                  $('#keteranganed').val(data[0].product_detail);
+                $('.reset').html(': ');
+                $('#kodesewa').html(data.sewa.kodeSewa);
+                $('#namaUser').append(data.sewa.name);
+                $('#noIdentitas').append(data.sewa.noIdentitas);
+                $('#alamat').append(data.sewa.address);
+                $('#nohp').append(data.sewa.nohp);
+                $('#jamAmbil').append(data.sewa.jamPeminjaman);
+                $('#tglAmbil').append(data.sewa.tanggalPeminjaman);
+                $('#tglKembali').append(data.sewa.tanggalPengembalian);
+                $('#biayaSewa').append(data.sewa.totalBiayaSewa);
+                if(data.sewa.pembayaran == '1') {
+                  $('#pembayaran').append('Transfer DP');
+                  $('#resetdp').html('Nominal DP : ');
+                  $('#resetbukti').html('Bukti Pembayaran : ');
+                  $('#dp').append(data.sewa.nominal_DP);
+                  $('#bukti ').append("<a href='../../" + data.sewa.bukti_pembayaran + "' target='_blank'> Klik Disini Untuk Lihat Bukti</a>");
+                } else {
+                  $('#pembayaran').append('Bayar Ditempat');
+                  $('#dp').html('');
+                  $('#bukti ').html('');
+                  $('#resetdp').html('');
+                  $('#resetbukti').html('');
+                }
+
+                var rows = '';
+                $.each(data.sewa_detail, function (i, val) {
+                   rows += "<tr><td>" + val.kode_barang + "</td><td>" + val.namaProduct + "</td><td>" + val.quantity + "</td><td>" + rupiah(val.biayaSewa) + "</td><td>" + rupiah(val.subBiayaSewa) + "</td></tr>";
+                });
+                $("#myTable tbody").html(rows);
               },
               error: function() {
                   alert("Error occured!!")
               }
           });
 
-          
         });
 
-        $("#TambahForm").submit(function(e) {
-            e.preventDefault();    
-            var formData = new FormData(this);
-
-            $.ajax({
-                type: "POST",
-                url: "{{url('/admin/product/tambah')}}",
-                data: formData,
-                success: function (data) {
-                  if (data.msg == 1) {
+        $('#datatable1').on('click', '.acc', function (e) { 
+          e.preventDefault();
+          var sewaid = $(this).attr('data-id');
+          $.ajax({
+              type: "GET",
+              url: "{{url('/admin/transaksi/pengambilan/acc')}}" + "/" + sewaid,
+              dataType: "json",
+              success: function (data) {
+                if (data.msg == 1) {
                           Swal.fire(
                           'Sukses!',
                           'Data berhasil disimpan',
-                          'success'
-                        )
-                        $('#modaldemo3').modal('hide');
-                        bTable.ajax.reload();
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!'
-                        })
-                    }
-                },
-                error: function() {
-                    alert("Error occured!!")
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-          
-        $("#EditForm").submit(function(e) {
-            e.preventDefault();    
-            var formData = new FormData(this);
-
-            $.ajax({
-                type: "POST",
-                url: "{{url('/admin/product/update')}}",
-                data: formData,
-                success: function (data) {
-                  if (data.msg == 1) {
-                          Swal.fire(
-                          'Sukses!',
-                          'Data berhasil di edit',
                           'success'
                         )
                         $('#modaldemo2').modal('hide');
@@ -255,64 +291,9 @@
                 },
                 error: function() {
                     alert("Error occured!!")
-                },
-                cache: false,
-                contentType: false,
-                processData: false
+                }
             });
-        });
-
-        $('#datatable1').on('click', '.del', function (e) { 
-          e.preventDefault();
-          var brgid = $(this).attr('data-id');
-          Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                  type: "GET",
-                    url: "{{url('/admin/product/delete')}}" + "/" + brgid,
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.msg == '1') {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                            bTable.ajax.reload();
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!'
-                            })
-                        }
-                    },
-                    error: function() {
-                        alert("Error occured!!")
-                    }
-                })
-            }
-          })
-        });
-        
-        
-
-        $('#datatable2').DataTable({
-          bLengthChange: false,
-          searching: false,
-          responsive: true
-        });
-
-        // Select2
-
+          });
 
         $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
 

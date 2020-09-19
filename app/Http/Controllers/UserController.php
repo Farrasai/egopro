@@ -132,7 +132,7 @@ class UserController extends Controller
       $data['nohp'] = $request->nohp;
       $data['password'] = bcrypt($request->pass);
       $data['address'] = $request->alamat;
-      $data['created_at'] = Carbon::now()->timestamp;
+      $data['created_at'] = Carbon::now();
       $update = DB::table('users')->insert($data);
       return response()->json(['msg'=>'1']);
     }
@@ -156,7 +156,7 @@ class UserController extends Controller
       
       $data['name'] = $request->namaed;
       $data['email'] = $request->emailed;
-      $data['updated_at'] = Carbon::now()->timestamp;
+      $data['updated_at'] = Carbon::now();
       if (!empty($request->avatared)) {
         $avatar = $request->avatared; 
           $avatar_name = date('dmy_H_s_i');
