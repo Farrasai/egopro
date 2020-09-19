@@ -4,16 +4,15 @@
 <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
         <a class="breadcrumb-item" href="{{ route('admin.index') }}">Dashboard</a>
-        <a class="breadcrumb-item" href="#">Transaksi</a>
-        <span class="breadcrumb-item active">Data Pengembalian</span>
+        <span class="breadcrumb-item active">Laporan</span>
       </nav>
         
       <div class="sl-pagebody">
       <div class="row">
           <div class="col-sm-3 col-md-9">
             <div class="sl-page-title">
-              <h5>Data Pengembalian</h5>
-                <p>Halaman Data Pengembalian Barang</p>
+              <h5>Data Laporan</h5>
+                <p>Halaman Data Laporan Barang</p>
             </div>
             </div>
           </div>
@@ -22,104 +21,17 @@
             <table id="datatable1" class="table table-hover table-bordered nowrap" style="width:100%">
               <thead class="bg-info">
                 <tr>
-                  <th>Kode Invoice</th>
-                  <th>Nama</th>
-                  <th>No Identitas</th>
-                  <th>No HP</th>
-                  <th>Jam Kembali</th>
-                  <th>Tanggal Kembali</th>
-                  <th>Tanggal Ambil</th>
-                  <th>Aksi</th>
+                  <th>No</th>
+                  <th>Tanggal Sewa</th>
+                  <th>Nama Penyewa</th>
+                  <th>Barang</th>
+                  <th>Biaya Sewa</th>
+                  <th>Denda</th>
                 </tr>
               </thead>
             </table>
           </div><!-- table-wrapper -->
         </div><!-- card -->
-      <div id="modaldemo2" class="modal fade" style="display: none;" aria-hidden="true">
-          <div class="modal-dialog" style="max-width: 70vw;" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-header pd-x-20">
-                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Detail Pengembalian</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body pd-25">
-                <table>
-                    <tr>
-                        <td style="width: 30%;"><h5 class="lh-3">Kode Invoice</h5></td>
-                        <td><h5 class="lh-3" id="kodesewa"></h5></td>
-                    </tr>
-                    <tr>
-                        <td><p class="mg-b-5">Nama Penyewa</td>
-                        <td class="reset" id="namaUser">:</td>
-                    </tr>
-                    <tr>
-                        <td>No Identitas</td>
-                        <td class="reset" id="noIdentitas">:</td>
-                    </tr>
-                    <tr>
-                        <td>No Handphone</td>
-                        <td class="reset" id="nohp">:</td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: top;text-align: left;">Alamat Lengkap</td>
-                        <td class="reset" id="alamat"></td>
-                    </tr>
-                    <tr>
-                        <td>Jam Kembali</td>
-                        <td class="reset" id="jamKembali">:</td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Kembali</td>
-                        <td class="reset" id="tglKembali">:</td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Ambil</td>
-                        <td class="reset" id="tglAmbil">:</td></p>
-                    </tr>
-                    <tr>
-                        <td>Total Biaya Sewa</td>
-                        <td class="reset" id="biayaSewa">:</td></p>
-                    </tr>
-                    <tr>
-                        <td>Pembayaran</td>
-                        <td class="reset" id="pembayaran">:</td></p>
-                    </tr>
-                    <tr>
-                        <td id="resetdp">Nominal DP</td>
-                        <td class="reset" id="dp">:</td></p>
-                    </tr>
-                    <tr>
-                        <td id="resetbukti">Bukti Pembayaran</td>
-                        <td class="reset" id="bukti">:</td></p>
-                    </tr>
-                </table>
-                <br><br>
-                <h5 class="lh-3">Data Sewa Barang</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered table-primary mg-b-0" id="myTable">
-                    <thead>
-                        <tr>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Jumlah Sewa</th>
-                        <th>Harga Sewa</th>
-                        <th>SubHarga Sewa</th>
-                        </tr>
-                    </thead>
-                      <tr>
-                        <td colspan="5"><center>Data Tidak Ditemukan</center></td>
-                      </tr>
-                    </table>
-                </div>
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div><!-- modal-dialog -->
-      </div>
         </div><!-- sl-pagebody -->
       <footer class="sl-footer">
         <div class="footer-left">
@@ -139,7 +51,6 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('.sl-menu-link').removeClass('active');
-        $('#transaksi').addClass('show-sub');
         $('#transaksi2').addClass('active');
 
         function rupiah(angka){

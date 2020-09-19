@@ -139,6 +139,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('.sl-menu-link').removeClass('active');
+        $('#transaksi').addClass('show-sub');
         $('#transaksi1').addClass('active');
 
         function rupiah(angka){

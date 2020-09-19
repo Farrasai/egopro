@@ -78,7 +78,7 @@
             <span class="menu-item-label">Daftar Pelanggan</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link" id="transaksi">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-cart-outline tx-24"></i>
             <span class="menu-item-label">Transaksi</span>
@@ -87,7 +87,7 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('pemesanan.admin') }}" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
-          <li class="nav-item"><a href="form-layouts.html" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
+          <li class="nav-item"><a href="{{ route('pengembalian.admin') }}" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
         </ul>
         <a href="#" class="sl-menu-link" id="laporan">
           <div class="sl-menu-item" >
