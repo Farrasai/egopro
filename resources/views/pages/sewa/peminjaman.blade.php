@@ -70,7 +70,7 @@
                 </td>
                 @endif
                 <td>
-                  @if($row->status_peminjaman == 1)
+                  @if($row->status_peminjaman == 1 && $row->bukti_pembayaran === NULL)
                   <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm">Ubah</a>
                   <br>
                   <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm">Batal</a>
