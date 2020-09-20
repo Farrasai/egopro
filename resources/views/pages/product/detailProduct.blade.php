@@ -31,7 +31,12 @@
               </h4>
             </div>
           @endif
-          <div class="product_text"><p>{{ $product->product_detail }}</p></div>
+          <div>
+            @if($product->product_detail)
+              <div class="product_text"><label>Include </label></div>       
+              <div class="product_text" style="margin-top: 0px"><p>{{ $product->product_detail }}</p></div>
+            @endif
+          </div>
           <div class="row">
             <div class="col-4">
               <div class="product_text" >

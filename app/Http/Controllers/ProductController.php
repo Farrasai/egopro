@@ -32,7 +32,7 @@ class ProductController extends Controller
 
     public function productByCategories($id)
     {
-        $products = DB::table('products')->where('category_id', $id)->paginate(5);
+        $products = DB::table('products')->where('category_id', $id)->paginate(10);
         $categories = DB::table('categories')->get();
         $categoryName = DB::table('categories')->where('id', $id)->first();
         return view('pages.product.byCategories', compact('products', 'categories', 'categoryName'));

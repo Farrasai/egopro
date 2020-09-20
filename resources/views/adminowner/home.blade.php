@@ -17,6 +17,9 @@
     $totalProdukLighting = DB::table('products')->where('category_id',5)->count();
     $totalStokLighting = DB::table('products')->where('category_id',5)->sum('product_quantity');
 
+    $totalProdukOther = DB::table('products')->where('category_id',6)->count();
+    $totalStokOther = DB::table('products')->where('category_id',6)->sum('product_quantity');
+
     $totalPengguna = DB::table('users')->whereNotNull('email_verified_at')->count();
     $totalTransaksi = DB::table('sewa')->where('status', 2)->count();
 @endphp
@@ -183,6 +186,25 @@
             <div>
               <span class="tx-11 tx-white-6">Stok Tersedia</span>
               <h6 class="tx-white mg-b-0">{{ $totalStokLighting }} lighting</h6>
+            </div>
+          </div><!-- -->
+        </div><!-- card -->
+      </div><!-- col-3 -->
+
+      <div class="col-sm-6 col-xl-4 mg-t-20 mg-sm-t-0">
+        <div class="card pd-20 bg-primary">
+          <div class="d-flex justify-content-between align-items-center mg-b-10">
+            <h6 class="tx-11 tx-uppercase mg-b-0 tx-spacing-1 tx-white">Total Barang</h6>
+            <a href="" class="tx-white-8 hover-white">Other</a>
+          </div><!-- card-header -->
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
+            <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ $totalProdukOther }} Barang</h3>
+          </div><!-- card-body -->
+          <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
+            <div>
+              <span class="tx-11 tx-white-6">Stok Tersedia</span>
+              <h6 class="tx-white mg-b-0">{{ $totalStokOther }} other</h6>
             </div>
           </div><!-- -->
         </div><!-- card -->

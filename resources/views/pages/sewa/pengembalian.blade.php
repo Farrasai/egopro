@@ -37,33 +37,54 @@
                 <th scope="col">Tanggal Pengembalian</th>
                 <th scope="col">Jam Pengembalian</th>
                 <th scope="col">Total Biaya Sewa</th>
+                <th scope="col">Penyewa Mengembalikan</th>
+                <th scope="col">Denda</th>
                 <th scope="col">Status Pengembalian</th>
-
               </tr>
             </thead>
             <tbody>
             @foreach($pengembalian as $row)
+            @php
+              $tanggalAcc = $row->tanggalAcc;
+              $getTanggal = explode(' ', $tanggalAcc);
+              $userMengembalikan = $getTanggal[0];
+            @endphp
               <tr >
                 @if($row->status_pengembalian == 2 || $row->status_pengembalian == 3  || $row->status_pengembalian == 4 )
-                <td scope="col" ><h5>{{ $no++ }}</h5></td>
-                <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
-                <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPengembalian)) }}</h5></td>
-                <td scope="col"><h5>{{ $row->jamPengembalian }}</h5></td>
-                <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
-                <td scope="col">
-                  @if($row->status_pengembalian == 2)
-                  <div class="badge progress-bar-warning">Proses</div>
-                  @elseif($row->status_pengembalian == 3)
-                  <div class="badge progress-bar-warning">Pengembalian</div>
-                  @elseif($row->status_pengembalian == 4)
-                  <div class="badge progress-bar-danger">Denda</div>
+                  <td scope="col" ><h5>{{ $no++ }}</h5></td>
+                  <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
+                  <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPengembalian)) }}</h5></td>
+                  <td scope="col"><h5>{{ $row->jamPengembalian }}</h5></td>
+                  <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
+                  @if($row->tanggalAcc)
+                    <td scope="col"><h5>{{ date('d-M-Y', strtotime($userMengembalikan)) }}</h5></td>
+                  @else
+                    <td scope="col"><h5></h5></td>
+                  @endif
+                  @if($row->tanggalAcc)
+                    @if($row->denda == 1)
+                      <td scope="col"><h5><div class="badge progress-bar-info">Tidak</div></h5></td>
+                    @else
+                      <td scope="col"><h5><div class="badge progress-bar-danger">Ya</div></h5></td>
+                    @endif
+                  @else
+                  <td scope="col"><h5><div class="badge progress-bar-info"></div></h5></td>
+                  @endif
+                  <td scope="col">
+                    @if($row->status_pengembalian == 2)
+                    <div class="badge progress-bar-warning mt-3">Menunggu Pengembalian</div>
+                    @elseif($row->status_pengembalian == 3)
+                    <div class="badge progress-bar-success mt-3">Sudah Dikembalikan</div>
+                    @endif
                   @endif
                 </td>
-                @endif
               </tr>
             @endforeach
             </tbody>
           </table>
+          <div class="pagination mt-5">
+            {{ $pengembalian->links() }}
+          </div>
         </div>
         @include('layouts.profile_user')
       </div>

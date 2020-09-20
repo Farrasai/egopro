@@ -31,10 +31,10 @@ class UserSewaController extends Controller
     {
         $pengembalian = DB::table('sewa')
             ->join('pengembalian_barang', 'sewa.id', 'pengembalian_barang.sewaId')
-            ->select('sewa.*', 'pengembalian_barang.tanggalPengembalian', 'pengembalian_barang.jamPengembalian', 'pengembalian_barang.sewaId', 'pengembalian_barang.status_pengembalian')
+            ->select('sewa.*', 'pengembalian_barang.tanggalPengembalian', 'pengembalian_barang.jamPengembalian', 'pengembalian_barang.sewaId', 'pengembalian_barang.status_pengembalian', 'pengembalian_barang.denda', 'pengembalian_barang.tanggalAcc')
             ->where('sewa.userId', Auth::id())
             ->orderBy('sewa.id', 'DESC')
-            ->get();
+            ->paginate(5);
         return view('pages.sewa.pengembalian', compact('pengembalian'));
     }
 

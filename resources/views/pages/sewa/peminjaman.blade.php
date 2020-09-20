@@ -37,16 +37,12 @@
                 <th scope="col" class="text-center">Invoice</th>
                 <th scope="col" class="text-center">Bukti Pembayaran</th>
                 <th scope="col" class="text-center">Aksi</th>
-
               </tr>
             </thead>
             <tbody>
             @foreach($peminjaman as $row)
-            {{-- @php
-            dd($row)
-            @endphp --}}
-              <tr >
-                @if($row->status == 1 || $row->status == 2)
+            <tr >
+              @if($row->status_peminjaman == 1 || $row->status_peminjaman == 2)
                 <td scope="col" ><h5>{{ $no++ }}</h5></td>
                 <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
                 <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
@@ -55,28 +51,28 @@
                 <td scope="col"><h5>{{ $row->keterangan }}</h5></td>
                 <td scope="col">
                   @if($row->status_peminjaman == 1)
-                  <div class="badge progress-bar-warning">Proses</div>
+                  <div class="badge progress-bar-warning mt-3">Proses</div>
                   @elseif($row->status_peminjaman == 2)
-                  <div class="badge progress-bar-info">Sewa</div>
+                  <div class="badge progress-bar-info mt-3">Sewa</div>
                   @endif
                 </td>
                 <td scope="col">
-                  <a href="{{ url('user/invoice/peminjaman/'.$row->id .'/' .$row->sewaId) }}" class="btn btn-primary btn-sm" style="margin-left:20px">Invoice</a>
+                  <a href="{{ url('user/invoice/peminjaman/'.$row->id .'/' .$row->sewaId) }}" class="btn btn-primary btn-sm mt-3" style="margin-left:20px">Invoice</a>
                 </td>
                 <td>
                   @if($row->pembayaran == 1 && $row->bukti_pembayaran === NULL)
-                  <button id="{{ $row->kodeSewa }}" type="button" class="btn btn-success btn-sm" style="margin-left:40px" data-toggle="modal" data-target="#uploadBukti" onclick="uploadBukti(this.id)" >Upload</button>
+                  <button id="{{ $row->kodeSewa }}" type="button" class="btn btn-success btn-sm mt-3" style="margin-left:40px" data-toggle="modal" data-target="#uploadBukti" onclick="uploadBukti(this.id)">Upload</button>
                   @endif
                 </td>
-                @endif
+              @endif
                 <td>
                   @if($row->status_peminjaman == 1 && $row->bukti_pembayaran === NULL)
-                  <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm">Ubah</a>
+                  <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm mt-3">Ubah</a>
                   <br>
-                  <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm">Batal</a>
+                  <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm ">Batal</a>
                   @endif
                 </td>
-              </tr>
+            </tr>
             @endforeach
             </tbody>
           </table>
