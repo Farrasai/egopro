@@ -99,7 +99,7 @@ Route::get('admin/transaksi/pengembalian', 'Admin\TransaksiController@pengembali
 Route::get('admin/transaksi/pengembalian/serverside', 'Admin\TransaksiController@getKembali')->name('admin.pengembalian.get');
 Route::get('admin/transaksi/pengembalian/detail/{id}', 'Admin\TransaksiController@detail2')->name('admin.pengembalian.detail');
 Route::get('admin/transaksi/pengembalian/acc/{id}', 'Admin\TransaksiController@acc2')->name('admin.pengembalian.acc');
-Route::get('admin/transaksi/pengembalian/cetaknota/{id}', 'Admin\TransaksiController@cetaknota')->name('admin.pengembalian.cetaknota');
+Route::post('admin/transaksi/pengembalian/cetaknota/{id}', 'Admin\TransaksiController@cetaknota')->name('admin.pengembalian.cetaknota');
 
 //Laporan
 Route::get('admin/laporan', 'Admin\LaporanController@index')->name('laporan.admin');
