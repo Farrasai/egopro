@@ -9,12 +9,18 @@
         
       <div class="sl-pagebody">
       <div class="row">
-          <div class="col-sm-3 col-md-9">
+          <div class="col-sm-3 col-md-6"> 
             <div class="sl-page-title">
               <h5>Data Laporan</h5>
                 <p>Halaman Data Laporan Barang</p>
             </div>
             </div>
+            <div class="col-sm-3 col-md-3 mg-t-10 mg-md-t-10">
+              <button class="btn btn-outline-success btn-block"><i class="fa fa-book mg-r-10"></i> Cetak Excel</button>
+            </div><!-- col-sm -->
+            <div class="col-sm-3 col-md-3 mg-t-10 mg-md-t-10">
+              <button class="btn btn-outline-warning btn-block"><i class="fa fa-print mg-r-10"></i> Cetak PDF</button>
+            </div><!-- col-sm -->
           </div>
         <div class="card pd-20 pd-sm-40">
           <div class="table-wrapper">
@@ -25,6 +31,7 @@
                   <th>Tanggal Sewa</th>
                   <th>Nama Penyewa</th>
                   <th>Barang</th>
+                  <th>Jumlah Sewa</th>
                   <th>Biaya Sewa</th>
                   <th>Denda</th>
                 </tr>
@@ -51,7 +58,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('.sl-menu-link').removeClass('active');
-        $('#transaksi2').addClass('active');
+        $('#laporan').addClass('active');
 
         function rupiah(angka){
           var rupiah = '';		
@@ -60,22 +67,37 @@
           return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
         }
 
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
         var bTable = $('#datatable1').DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
-          ajax: "/admin/transaksi/pengembalian/serverside",
+          dom: "<'row'<'col-sm-6'l><'col-sm-3' <'datesearchbox'>><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+          ajax: {
+              "url": "/admin/laporan/serverside/" + start.format('YYYY-MM-DD') + "/" + end.format('YYYY-MM-DD'),
+              "type": "POST",
+              "datatype": "json",
+          },
           language: {
             searchPlaceholder: 'Search...',
             sSearch: '',
             lengthMenu: '_MENU_ items/page',
-            processing: '<br><br><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span>Loading...</span>',
+            processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span>Loading...</span>',
           },
           columns: 
           [
             {
-              "data": 'kodeSewa',
-              "name": 'kodeSewa',
+              "data": 'DT_RowIndex',
+              "orderable": false, 
+              "searchable": false
+            },
+            {
+              "data": 'tanggalSewa',
+              "name": 'tanggalSewa',
               "orderable": true,
               "searchable": true
             },
@@ -86,155 +108,65 @@
               "searchable": true
             },
             {
-              "data": 'noIdentitas',
-              "name": 'noIdentitas',
+              "data": 'namaProduct',
+              "name": 'namaProduct',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'nohp',
-              "name": 'nohp',
+              "data": 'quantity',
+              "name": 'quantity',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'jamPengembalian',
-              "name": 'jamPengembalian',
+              "data": 'biayaSewa',
+              "name": 'biayaSewa',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'tanggalPengembalian',
-              "name": 'tanggalPengembalian',
+              "data": 'denda',
+              "name": 'denda',
               "orderable": true,
               "searchable": true
-            },
-            {
-              "data": 'tanggalPeminjaman',
-              "name": 'tanggalPeminjaman',
-              "orderable": true,
-              "searchable": true
-            },
-            {
-              data: 'action',
-              name: 'action'
             }
           ]
         });
 
-        $('#datatable1').on('click', '.detail', function (e) { 
-          e.preventDefault();
-          var sewaid = $(this).attr('data-id');
-          $.ajax({
-              type: "GET",
-              url: "{{url('/admin/transaksi/pengembalian/detail')}}" + "/" + sewaid,
-              dataType: "json",
-              beforeSend: function(){
-                Swal.fire({
-                  html: '<br><br><i class="fa fa-circle-o-notch fa-spin" style="font-size:100px"></i><br><br>',
-                  showConfirmButton: false
-                })
-              },
-              complete: function(){
-                Swal.close();
-                $('#modaldemo2').modal('show');
-              },
-              success: function (data) {
-                $('.reset').html(': ');
-                $('#kodesewa').html(data.sewa.kodeSewa);
-                $('#namaUser').append(data.sewa.name);
-                $('#noIdentitas').append(data.sewa.noIdentitas);
-                $('#alamat').append(data.sewa.address);
-                $('#nohp').append(data.sewa.nohp);
-                $('#jamKembali').append(data.sewa.jamPengembalian);
-                $('#tglAmbil').append(data.sewa.tanggalPeminjaman);
-                $('#tglKembali').append(data.sewa.tanggalPengembalian);
-                $('#biayaSewa').append(data.sewa.totalBiayaSewa);
-                if(data.sewa.pembayaran == '1') {
-                  $('#pembayaran').append('Transfer DP');
-                  $('#resetdp').html('Nominal DP : ');
-                  $('#resetbukti').html('Bukti Pembayaran : ');
-                  $('#dp').append(data.sewa.nominal_DP);
-                  $('#bukti ').append("<a href='../../" + data.sewa.bukti_pembayaran + "' target='_blank'> Klik Disini Untuk Lihat Bukti</a>");
-                } else {
-                  $('#pembayaran').append('Bayar Ditempat');
-                  $('#dp').html('');
-                  $('#bukti ').html('');
-                  $('#resetdp').html('');
-                  $('#resetbukti').html('');
-                }
+        $("div.datesearchbox").html('<div class="input-group"> <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div><input type="text" class="form-control pull-right" id="datesearch" name="daterange" placeholder="Search by date range.."> </div>');
 
-                var rows = '';
-                $.each(data.sewa_detail, function (i, val) {
-                   rows += "<tr><td>" + val.kode_barang + "</td><td>" + val.namaProduct + "</td><td>" + val.quantity + "</td><td>" + rupiah(val.biayaSewa) + "</td><td>" + rupiah(val.subBiayaSewa) + "</td></tr>";
-                });
-                $("#myTable tbody").html(rows);
-              },
-              error: function() {
-                  alert("Error occured!!")
-              }
-          });
+        //menangani proses saat apply date range
+        function cb(startA, endA) {
+            $('#datesearch span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            if (start.valueOf() != startA.valueOf() || end.valueOf() != endA.valueOf()) {
+                start = startA;
+                end = endA;
+                var urldata = "/admin/laporan/serverside/" + startA.format('YYYY-MM-DD') + "/" + endA.format('YYYY-MM-DD');
+                // $(".excel").attr("href", 'DownloadExcel/?dateFrom=' + startA.format('YYYY-MM-DD') + '&dateTo=' + endA.format('YYYY-MM-DD'));
+                // $(".pdf").attr("href", 'PrintPDF/?dateFrom=' + startA.format('YYYY-MM-DD') + '&dateTo=' + endA.format('YYYY-MM-DD'));
+                bTable.ajax.url(urldata).load();
+            }
+        }
 
-        });
+        $('input[name="daterange"]').daterangepicker({
+            startDate: start,
+            endDate: end,
+            opens: 'left',
+            ranges: {
+                Today: [moment(), moment()],
+                Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            buttonClasses: 'btn btn-sm mx-1',
+            applyButtonClasses: 'btn-primary',
+            cancelClass: 'btn-secondary',
+        }, cb);
 
-        $('#datatable1').on('click', '.acc', function (e) { 
-          e.preventDefault();
-          var sewaid = $(this).attr('data-id');
-          $.ajax({
-              type: "GET",
-              url: "{{url('/admin/transaksi/pengembalian/acc')}}" + "/" + sewaid,
-              dataType: "json",
-              beforeSend: function(){
-                Swal.fire(
-                      'Succes!',
-                      'Your file has been acc.',
-                      'success'
-                    )
-              },
-              success: function (data) {
-                if (data.msg == 1) {
-                  $('#modaldemo2').modal('hide');
-                  bTable.ajax.reload();
-                  
-                  Swal.fire({
-                    title: 'Apakah ingin mencetak Nota Pembayaran?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, print it!'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      $.ajax({
-                        type: "GET",
-                        url: "{{url('/admin/transaksi/pengembalian/cetaknota')}}" + "/" + sewaid,
-                        dataType: "json",
-                        beforeSend: function(){
-                          Swal.fire({
-                            html: '<br><br><i class="fa fa-circle-o-notch fa-spin" style="font-size:100px"></i><br><br>',
-                            showConfirmButton: false
-                          })       
-                        },
-                        complete: function(){
-                          Swal.close();
-                        }
-                      });
-                    }
-                  })                  
-                } else {
-                  Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'Something went wrong!'
-                  })
-                }
-              },
-              error: function() {
-                  alert("Error occured!!")
-              }
-            });
-          });
+        cb(start, end);
 
         $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
 

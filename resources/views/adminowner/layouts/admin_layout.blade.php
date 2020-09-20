@@ -40,6 +40,7 @@
     <link href="{{ asset('backend-theme/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/daterange/daterangepicker.css')}}" rel="stylesheet">
 
     {{-- Toaster --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -89,7 +90,7 @@
           <li class="nav-item"><a href="{{ route('pemesanan.admin') }}" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
           <li class="nav-item"><a href="{{ route('pengembalian.admin') }}" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
         </ul>
-        <a href="#" class="sl-menu-link" id="laporan">
+        <a href="{{ route('laporan.admin') }}" class="sl-menu-link" id="laporan">
           <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
             <span class="menu-item-label">Laporan</span>
@@ -134,7 +135,8 @@
     <script src="{{ asset('backend-theme/lib/popper.js/popper.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/bootstrap/bootstrap.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/jquery-ui/jquery-ui.js')}}"></script>
-    
+    <script src="{{ asset('backend-theme/lib/moment/moment.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/daterange/daterangepicker.js')}}"></script>
 
     @endguest
     @yield('admin_content')

@@ -40,7 +40,7 @@
 				<td style="text-align: center;">{{$p->kode_barang}}</td>
 				<td style="text-align: center;">{{$p->namaProduct}}</td>
 				<td style="text-align: center;">{{$p->quantity}}</td>
-                <td style="text-align: center;">{{$p->biayaSewa}}</td>
+                <td style="text-align: center;">{{rupiah($p->biayaSewa)}}</td>
 				<td style="text-align: center;">LUNAS</td>
 				<td style="text-align: center;">{{$p->tanggalPengembalian}}</td>
 			</tr>
