@@ -45,9 +45,9 @@
             <div class="product_item">
               <div class="product_border"></div>
               <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image) }} " style="height: 100px; widht:100px;"  alt=""></div>
-              <div class="product_content">
+              <div class="product_content" style="margin-top: -50px">
                 <div class="product_price text-danger font-weight-bold">{{ rupiah($product->price) }}</div>
-                <div class="product_name" style="margin-top: -10px"><div><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}" tabindex="0">{{ $product->product_name }}</a></div></div>
+                <div class="product_name" style="margin-right: 20px; margin-left:20px; margin-top: -10px; "><div><a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}" tabindex="0">{{ $product->product_name }}</a></div></div>
               </div>
             </div>
             @endforeach

@@ -56,15 +56,23 @@
                   <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPengembalian)) }}</h5></td>
                   <td scope="col"><h5>{{ $row->jamPengembalian }}</h5></td>
                   <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
-                  <td scope="col"><h5>{{ date('d-M-Y', strtotime($userMengembalikan)) }}</h5></td>
-                  @if($row->denda == 1)
-                    <td scope="col"><h5><div class="badge progress-bar-info">Tidak</div></h5></td>
+                  @if($row->tanggalAcc)
+                    <td scope="col"><h5>{{ date('d-M-Y', strtotime($userMengembalikan)) }}</h5></td>
                   @else
-                    <td scope="col"><h5><div class="badge progress-bar-danger">Ya</div></h5></td>
+                    <td scope="col"><h5></h5></td>
+                  @endif
+                  @if($row->tanggalAcc)
+                    @if($row->denda == 1)
+                      <td scope="col"><h5><div class="badge progress-bar-info">Tidak</div></h5></td>
+                    @else
+                      <td scope="col"><h5><div class="badge progress-bar-danger">Ya</div></h5></td>
+                    @endif
+                  @else
+                  <td scope="col"><h5><div class="badge progress-bar-info"></div></h5></td>
                   @endif
                   <td scope="col">
                     @if($row->status_pengembalian == 2)
-                    <div class="badge progress-bar-warning mt-3">Pengembalian</div>
+                    <div class="badge progress-bar-warning mt-3">Menunggu Pengembalian</div>
                     @elseif($row->status_pengembalian == 3)
                     <div class="badge progress-bar-success mt-3">Sudah Dikembalikan</div>
                     @endif

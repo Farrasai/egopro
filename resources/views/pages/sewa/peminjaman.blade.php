@@ -61,15 +61,15 @@
                 </td>
                 <td>
                   @if($row->pembayaran == 1 && $row->bukti_pembayaran === NULL)
-                  <button id="{{ $row->kodeSewa }}" type="button" class="btn btn-success btn-sm" style="margin-left:40px" data-toggle="modal" data-target="#uploadBukti" onclick="uploadBukti(this.id)">Upload</button>
+                  <button id="{{ $row->kodeSewa }}" type="button" class="btn btn-success btn-sm mt-3" style="margin-left:40px" data-toggle="modal" data-target="#uploadBukti" onclick="uploadBukti(this.id)">Upload</button>
                   @endif
                 </td>
               @endif
                 <td>
                   @if($row->status_peminjaman == 1 && $row->bukti_pembayaran === NULL)
-                  <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm">Ubah</a>
+                  <a href="{{ url('user/ubah-sewa/'.$row->kodeSewa) }}" class="btn btn-warning btn-sm mt-3">Ubah</a>
                   <br>
-                  <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm">Batal</a>
+                  <a href="{{ url('user/batal-sewa/'.$row->kodeSewa) }}" id="batalSewa" class="btn btn-danger btn-sm ">Batal</a>
                   @endif
                 </td>
             </tr>
