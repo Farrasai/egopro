@@ -22,12 +22,13 @@
         <div class="header_search">
           <div class="header_search_content">
             <div class="header_search_form_container">
-              <form action="#" class="header_search_form clearfix">
+              <form action="{{ route('products.search') }}" method="POST" class="header_search_form clearfix">@csrf
                 <input
                   type="search"
                   required="required"
                   class="header_search_input"
                   placeholder="Search for products..."
+                  name="search"
                 />
                 <div class="custom_dropdown">
                   <div class="custom_dropdown_list">
@@ -131,7 +132,7 @@
 
               <ul class="cat_menu">
                 @foreach ($categories as $category)
-                  <li><a href="#">{{ $category->category_name  }}<i class="fas fa-chevron-right ml-auto"></i></a></li>  
+                  <li><a href="{{ url('products/'.$category->id) }}">{{ $category->category_name  }}<i class="fas fa-chevron-right ml-auto"></i></a></li>  
                 @endforeach
                 {{-- <li><a href="#">Audio <i class="fas fa-chevron-right ml-auto"></i></a></li>
                 <li><a href="#">Camera<i class="fas fa-chevron-right"></i></a></li>
@@ -162,7 +163,7 @@
             <div class="main_nav_menu ml-auto">
               <ul class="standard_dropdown main_nav_dropdown">
               <li><a href="{{ route('index') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-                <li class="hassubs">
+                {{-- <li class="hassubs">
                   <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                   <ul>
                     <li>
@@ -177,7 +178,7 @@
                     <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                     <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                   </ul>
-                </li>
+                </li> --}}
                 <li><a href="{{ route('all.product') }}">Product<i class="fas fa-chevron-down"></i></a></li>
                 <li><a href="{{ route('info.user') }}">Contact Info<i class="fas fa-chevron-down"></i></a></li>
               </ul>

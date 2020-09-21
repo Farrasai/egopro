@@ -1,6 +1,6 @@
 
 <div class="col-lg-3 col-sm-12">
-  <div class="card">
+  <div class="card  bg-light">
     @if(!Auth::user()->avatar == NULL)
       <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar-user" class="card-img-top mt-2" style="height: 90px; width:90px; margin:auto; border-radius:50%;">
     @else
@@ -13,7 +13,7 @@
       <ul class="list-group list-group-flush">
         {{-- @if($data) --}}
         <li class="list-group-item"><a href="{{ route('home.user') }}">Riwayat Sewa</a></li>
-        <li class="list-group-item"><a href="{{ route('userSewa.peminjaman') }}">Sewa Barang</a></li>
+        <li class="list-group-item"><a href="{{ route('userSewa.peminjaman') }}">Peminjaman Barang</a></li>
         <li class="list-group-item"><a href="{{ route('userSewa.pengembalian') }}">Pengembalian Barang</a></li>
         @if(Cart::instance(Auth::id())->count() > 0)
           <li class="list-group-item"><a href="{{ route('show.cart') }}">Ubah Cart</a></li>

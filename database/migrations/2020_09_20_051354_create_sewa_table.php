@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeminjamanBarangTable extends Migration
+class CreateSewaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreatePeminjamanBarangTable extends Migration
      */
     public function up()
     {
-        Schema::create('peminjaman_barang', function (Blueprint $table) {
+        Schema::create('sewa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sewaId')->constrained('sewa')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('kodeSewa');
             $table->foreignId('userId')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('tanggalPeminjaman');
-            $table->string('jamPeminjaman');
-            $table->string('status_peminjaman')->nullable();
+            $table->string('totalBiayaSewa');
+            $table->string('pembayaran');
+            $table->string('status');
+            $table->string('bukti_pembayaran')->nullable();
+            $table->string('nominal_DP')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreatePeminjamanBarangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peminjaman_barang');
+        Schema::dropIfExists('sewa');
     }
 }

@@ -16,21 +16,23 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'User1',
             'email' => 'user@gmail.com',
+            'noIdentitas' => '1234567891234567',
             'email_verified_at' => now(),
             'password' => bcrypt('123123123'),
-            'address' => null,
-            'nohp' => null,
-            'avatar' => 'media/profileUser/avatar-user.jpg',
+            'address' => 'Jl Soekarno Hatta',
+            'nohp' => '08123456789765',
+            'avatar' => 'frontend-theme/images/avatar-user.jpg',
         ]);
 
         DB::table('users')->insert([
             'name' => 'User2',
             'email' => 'user2@gmail.com',
+            'noIdentitas' => '8972341234442135',
             'email_verified_at' => now(),
             'password' => bcrypt('123123123'),
-            'address' => null,
-            'nohp' => null,
-            'avatar' => 'media/profileUser/avatar-user.jpg',
+            'address' => 'Jl Jendral Sudirman',
+            'nohp' => '0852123456789876',
+            'avatar' => 'frontend-theme/images/avatar-user.jpg',
         ]);
     }
 }

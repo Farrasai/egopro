@@ -19,6 +19,7 @@ class CreatePengembalianBarangTable extends Migration
             $table->foreignId('userId')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tanggalPengembalian');
             $table->string('jamPengembalian');
+            $table->string('tanggalAcc')->nullable();
             $table->string('denda')->nullable();
             $table->string('status_pengembalian')->nullable();
             $table->timestamps();

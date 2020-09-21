@@ -3,9 +3,13 @@
 @include('layouts.menubar')
 
 @php
-  $cats = DB::table('categories')->first();
-  $catId = $cats->id;
-  $products = DB::table('products')->where('category_id', $catId)->limit(10)->orderBy('id','DESC')->get();
+  // $cats = DB::table('categories')->first();
+  // $catId = $cats->id;
+  $productsCamera = DB::table('products')->where('category_id', 1)->limit(10)->orderBy('id','DESC')->get();
+  $productsAudio = DB::table('products')->where('category_id', 2)->limit(10)->orderBy('id','DESC')->get();
+  $productsEquipment = DB::table('products')->where('category_id', 3)->limit(10)->orderBy('id','DESC')->get();
+  $productsLensa = DB::table('products')->where('category_id', 4)->limit(10)->orderBy('id','DESC')->get();
+  $productsLighting = DB::table('products')->where('category_id', 5)->limit(10)->orderBy('id','DESC')->get();
 
 @endphp
 
@@ -57,7 +61,7 @@
     <div class="row">
       <div class="col">
         <div class="viewed_title_container">
-          <h3 class="viewed_title">Category {{ $cats->category_name  }}</h3>
+          <h3 class="viewed_title">Camera</h3>
           <div class="viewed_nav_container">
             <div class="viewed_nav viewed_prev">
               <i class="fas fa-chevron-left"></i>
@@ -73,7 +77,7 @@
 
           <div class="owl-carousel owl-theme viewed_slider">
             <!-- Recently Viewed Item -->
-            @foreach($products as $product)
+            @foreach($productsCamera as $product)
             <div class="owl-item">
               <div
                 class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
@@ -99,6 +103,190 @@
 </div>
 
 <div class="viewed">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="viewed_title_container">
+          <h3 class="viewed_title">Audio</h3>
+          <div class="viewed_nav_container">
+            <div class="viewed_nav viewed_prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="viewed_nav viewed_next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewed_slider_container">
+          <!-- Recently Viewed Slider -->
+
+          <div class="owl-carousel owl-theme viewed_slider">
+            <!-- Recently Viewed Item -->
+            @foreach($productsAudio as $product)
+            <div class="owl-item">
+              <div
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+              >
+                <div class="viewed_image">
+                  <img src="{{asset($product->image)}}" alt="" />
+                </div>
+                <div class="viewed_content text-center">
+                  <div class="viewed_price">{{rupiah($product->price)}}</div>
+                  <div class="viewed_name">
+                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="viewed">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="viewed_title_container">
+          <h3 class="viewed_title">Equipment</h3>
+          <div class="viewed_nav_container">
+            <div class="viewed_nav viewed_prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="viewed_nav viewed_next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewed_slider_container">
+          <!-- Recently Viewed Slider -->
+
+          <div class="owl-carousel owl-theme viewed_slider">
+            <!-- Recently Viewed Item -->
+            @foreach($productsEquipment as $product)
+            <div class="owl-item">
+              <div
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+              >
+                <div class="viewed_image">
+                  <img src="{{asset($product->image)}}" alt="" />
+                </div>
+                <div class="viewed_content text-center">
+                  <div class="viewed_price">{{rupiah($product->price)}}</div>
+                  <div class="viewed_name">
+                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="viewed">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="viewed_title_container">
+          <h3 class="viewed_title">Lensa</h3>
+          <div class="viewed_nav_container">
+            <div class="viewed_nav viewed_prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="viewed_nav viewed_next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewed_slider_container">
+          <!-- Recently Viewed Slider -->
+
+          <div class="owl-carousel owl-theme viewed_slider">
+            <!-- Recently Viewed Item -->
+            @foreach($productsLensa as $product)
+            <div class="owl-item">
+              <div
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+              >
+                <div class="viewed_image">
+                  <img src="{{asset($product->image)}}" alt="" />
+                </div>
+                <div class="viewed_content text-center">
+                  <div class="viewed_price">{{rupiah($product->price)}}</div>
+                  <div class="viewed_name">
+                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="viewed">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="viewed_title_container">
+          <h3 class="viewed_title">Lighting</h3>
+          <div class="viewed_nav_container">
+            <div class="viewed_nav viewed_prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="viewed_nav viewed_next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewed_slider_container">
+          <!-- Recently Viewed Slider -->
+
+          <div class="owl-carousel owl-theme viewed_slider">
+            <!-- Recently Viewed Item -->
+            @foreach($productsLighting as $product)
+            <div class="owl-item">
+              <div
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+              >
+                <div class="viewed_image">
+                  <img src="{{asset($product->image)}}" alt="" />
+                </div>
+                <div class="viewed_content text-center">
+                  <div class="viewed_price">{{rupiah($product->price)}}</div>
+                  <div class="viewed_name">
+                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- <div class="viewed">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -248,9 +436,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
-<!-- Brands -->
+{{-- <!-- Brands -->
 <div class="brands">
   <div class="container">
     <div class="row">
@@ -365,7 +553,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @include('layouts.footer')
 @endsection

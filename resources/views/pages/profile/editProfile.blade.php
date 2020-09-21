@@ -17,7 +17,7 @@
                       @if($data->avatar)
                         <img id="img" src="{{ URL::to($data->avatar) }}" style="width: 220px; height:220px; margin-left:75px">
                       @else
-                        <img id="img" src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2"   style="width: 220px; height:220px; margin-left:75px">
+                        <img id="img" src="{{ asset('frontend-theme/images/avatar-user.jpg') }}" alt="avatar-user" class="card-img-top mt-2" style="width: 220px; height:220px; margin-left:75px">
                       @endif
                         <div class="form-group">
                           <label class="custom-file">
@@ -34,6 +34,13 @@
                       <label for="name">Nama</label>
                       <input type="text" name="name" id="name" class="form-control" value="{{ $data->name }}">
                       @error('name')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="name">No Identitas (KTP)</label>
+                      <input type="text" name="noIdentitas" id="noIdentitas" class="form-control" value="{{ $data->noIdentitas }}">
+                      @error('noIdentitas')
                         <div class="text-danger mt-2">{{ $message }}</div>
                       @enderror
                     </div>

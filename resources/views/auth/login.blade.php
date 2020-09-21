@@ -4,7 +4,7 @@
 <div class="contact_form">
   <div class="container">
     <div class="row" style="padding-bottom:150px">
-      <div class="col-lg-5" style="border:1px solid grey; padding:20px; margin:auto; padding-bottom:70px ">
+      <div class="card  bg-light col-lg-5" style=" padding:20px; margin:auto; padding-bottom:70px ">
         <div class="contact_form_container">
           <div class="contact_form_title text-center">Sign In</div>
           <form method="POST" action="{{ route('login') }}">@csrf
@@ -28,7 +28,7 @@
                   @enderror 
               </div> 
 
-              <label for=""><a href="{{ route('password.request') }}" class="text-primary">Lupa password ?</a></label>
+              {{-- <label for=""><a href="{{ route('password.request') }}" class="text-primary">Lupa password ?</a></label> --}}
 
             </div> 
             <div class="contact_form_button mt-3">

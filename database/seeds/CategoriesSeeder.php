@@ -26,5 +26,8 @@ class CategoriesSeeder extends Seeder
         DB::table('categories')->insert([
             'category_name' => 'Lighting'
         ]);
+        DB::table('categories')->insert([
+            'category_name' => 'Other'
+        ]);
     }
 }

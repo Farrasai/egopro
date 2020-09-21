@@ -67,7 +67,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
                   <div class="top_bar_icon">
                     <img src="{{asset('frontend-theme/images/phone.png')}}" alt="" />
                   </div>
-
                   085-70-2222-111
 
                 </div>
@@ -89,12 +88,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
                             <div class="user_icon">                            
                               <a href="{{route('login')}}">
                                 <img src="{{asset('frontend-theme/images/user.svg')}}"/>
-                                {{ Auth::user()->name }}
+                                @php
+                                  $nameFull = explode(' ',Auth::user()->name);
+                                  $name =  $nameFull[0];   
+                                @endphp
+                                {{ $name }}
                               </a>  
                             </div>
                             <ul>
                                 <li><a href="{{ route('userProfile.edit') }}">Ubah Profile</a></li>
                                 <li><a href="{{ route('password.edit') }}">Ubah Password</a></li>
+                                <li><a href="{{ route('user.logout') }}">Logout</a></li>
                             </ul>
                         </li>
                       </ul>                 
@@ -106,9 +110,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
           </div>
         </div>
         @yield('content')
-
-  
-      
     </div>
 
 

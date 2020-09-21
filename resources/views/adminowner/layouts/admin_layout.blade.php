@@ -40,6 +40,7 @@
     <link href="{{ asset('backend-theme/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend-theme/lib/daterange/daterangepicker.css')}}" rel="stylesheet">
 
     {{-- Toaster --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -68,29 +69,31 @@
         </a><!-- sl-menu-link -->
         <a href="{{ route('product.admin') }}" class="sl-menu-link" id="barang">
           <div class="sl-menu-item" >
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+            <i class="menu-item-icon icon ion-ios-camera-outline tx-20"></i>
             <span class="menu-item-label">Daftar Barang</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link" id="pelanggan">
+        <a href="{{ route('user.admin') }}" class="sl-menu-link" id="pelanggan">
           <div class="sl-menu-item" >
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <i class="menu-item-icon ion-ios-person-outline tx-20"></i>
             <span class="menu-item-label">Daftar Pelanggan</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <a href="#" class="sl-menu-link" id="transaksi">
-          <div class="sl-menu-item" >
-            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-cart-outline tx-24"></i>
             <span class="menu-item-label">Transaksi</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link" id="laporan">
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('pemesanan.admin') }}" class="nav-link" id="transaksi1">Data Pengambilan</a></li>
+          <li class="nav-item"><a href="{{ route('pengembalian.admin') }}" class="nav-link" id="transaksi2">Data Pengembalian</a></li>
+        </ul>
+        <a href="{{ route('laporan.admin') }}" class="sl-menu-link" id="laporan">
           <div class="sl-menu-item" >
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
             <span class="menu-item-label">Laporan</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
       </div><!-- sl-sideleft-menu -->
@@ -132,7 +135,8 @@
     <script src="{{ asset('backend-theme/lib/popper.js/popper.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/bootstrap/bootstrap.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/jquery-ui/jquery-ui.js')}}"></script>
-    
+    <script src="{{ asset('backend-theme/lib/moment/moment.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/daterange/daterangepicker.js')}}"></script>
 
     @endguest
     @yield('admin_content')
@@ -160,10 +164,16 @@
     <script src="{{ asset('backend-theme/lib/datatables-responsive/dataTables.responsive.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/select2/js/select2.min.js')}}"></script>
     <script src="{{ asset('backend-theme/lib/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{ asset('backend-theme/lib/parsleyjs/parsley.js')}}"></script>
     {{-- Toaster  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $('.sl-menu-link').removeClass('active');
         $('#dashboard').addClass('active');
         @if(Session::has('message'))

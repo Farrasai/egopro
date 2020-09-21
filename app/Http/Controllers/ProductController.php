@@ -12,11 +12,12 @@ class ProductController extends Controller
     {
         return view('pages.info.index');
     }
-    
+
     public function product()
     {
-        $products =  DB::table('products')->get();
-        return view('pages.product.allProduct', compact('products'));
+        $products =  DB::table('products')->paginate(10);
+        $categories = DB::table('categories')->get();
+        return view('pages.product.allProduct', compact('products', 'categories'));
     }
 
     public function productDetail($id, $product_name)
@@ -27,5 +28,24 @@ class ProductController extends Controller
             ->where('products.id', $id)
             ->first();
         return view('pages.product.detailProduct', compact('product'));
+    }
+
+    public function productByCategories($id)
+    {
+        $products = DB::table('products')->where('category_id', $id)->paginate(10);
+        $categories = DB::table('categories')->get();
+        $categoryName = DB::table('categories')->where('id', $id)->first();
+        return view('pages.product.byCategories', compact('products', 'categories', 'categoryName'));
+    }
+
+    public function search(Request $request)
+    {
+        $item = $request->search;
+        $products = DB::table('products')
+            ->where('product_name', 'LIKE', '%' . $item . '%')
+            ->get();
+        $categories = DB::table('categories')->get();
+        // dd($categories);
+        return view('pages.search.search', compact('products', 'categories'));
     }
 }
