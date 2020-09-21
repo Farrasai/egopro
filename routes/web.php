@@ -104,3 +104,4 @@ Route::post('admin/transaksi/pengembalian/cetaknota/{id}', 'Admin\TransaksiContr
 //Laporan
 Route::get('admin/laporan', 'Admin\LaporanController@index')->name('laporan.admin');
 Route::post('admin/laporan/serverside/{tgl1}/{tgl2}', 'Admin\LaporanController@getLaporan')->name('admin.laporan.get');
+Route::get('admin/laporan/excel/{tgl1}/{tgl2}', 'Admin\LaporanController@excel')->name('admin.laporan.excel');
