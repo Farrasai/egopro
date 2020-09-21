@@ -21,7 +21,7 @@
                 <a href="https://www.instagram.com/egopro/"><i class="fab fa-instagram"></i></a>
               </li>
               <li>
-                <a href="https://www.instagram.com/egopro/"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.twitter.com/egoprojogja/"><i class="fab fa-twitter"></i></a>
               </li>
               <li>
                 <a href="https://api.whatsapp.com/send?phone=6285702222111&"><i class="fab fa-whatsapp "></i></a>
@@ -38,10 +38,12 @@
         <div class="footer_column">
           <div class="footer_title">Menu</div>
           <ul class="footer_list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Info</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/allProduct">Product</a></li>
+            <li><a href="/contact">Info</a></li>
+            @if (!Auth::user())
+            <li><a href="/login">Login</a></li>
+            @endif
             
           </ul>
           {{-- <div class="footer_subtitle">Gadgets</div>
@@ -55,12 +57,12 @@
         <div class="footer_column">
           <div class="footer_title">Find it Fast</div>
           <ul class="footer_list">
-            <li><a href="#">Camera</a></li>
-            <li><a href="#">Audio</a></li>
-            <li><a href="#">Equipment</a></li>
-            <li><a href="#">Lensa</a></li>
-            <li><a href="#">Lighting</a></li>
-            <li><a href="#">Others</a></li>
+            <li><a href="/products/1">Camera</a></li>
+            <li><a href="/products/2">Audio</a></li>
+            <li><a href="/products/3">Equipment</a></li>
+            <li><a href="/products/4">Lensa</a></li>
+            <li><a href="/products/5">Lighting</a></li>
+            <li><a href="/products/6">Others</a></li>
           </ul>
         </div>
       </div>

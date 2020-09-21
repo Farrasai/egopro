@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function product()
     {
-        $products =  DB::table('products')->paginate(10);
+        $products =  DB::table('products')->paginate(12);
         $categories = DB::table('categories')->get();
         return view('pages.product.allProduct', compact('products', 'categories'));
     }
@@ -32,7 +32,7 @@ class ProductController extends Controller
 
     public function productByCategories($id)
     {
-        $products = DB::table('products')->where('category_id', $id)->paginate(10);
+        $products = DB::table('products')->where('category_id', $id)->paginate(12);
         $categories = DB::table('categories')->get();
         $categoryName = DB::table('categories')->where('id', $id)->first();
         return view('pages.product.byCategories', compact('products', 'categories', 'categoryName'));

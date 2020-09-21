@@ -14,7 +14,7 @@
 <div class="shop">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-2">
 
         <!-- Shop Sidebar -->
         <div class="shop_sidebar">
@@ -29,7 +29,7 @@
 
       </div>
 
-      <div class="col-lg-9">
+      <div class="col-lg-10">
         
         <!-- Shop Content -->
         <div class="shop_content">
@@ -42,7 +42,7 @@
             
             <!-- Product Item -->
             @foreach ($products as $product)
-            <div class="product_item">
+            <div class="product_item" style="width: 240px;">
               <div class="product_border"></div>
               <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($product->image) }} " style="height: 100px; widht:100px;"  alt=""></div>
               <div class="product_content" style="margin-top: -50px">
