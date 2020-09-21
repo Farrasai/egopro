@@ -34,23 +34,23 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Kode Sewa</th>
-                <th scope="col">Tanggal Sewa</th>
-                <th scope="col">Tanggal Pengembalian</th>
-                <th scope="col">Total Biaya Sewa</th>
-                <th scope="col">Action</th>
+                <th scope="col" style="text-align: center">Kode Sewa</th>
+                <th scope="col" style="text-align: center">Tanggal Sewa</th>
+                <th scope="col" style="text-align: center">Tanggal Pengembalian</th>
+                <th scope="col" style="text-align: center">Total Biaya Sewa</th>
+                <th scope="col" style="text-align: center">Action</th>
               </tr>
             </thead>
             <tbody>
             @foreach($sewa as $row)
               <tr >
                 @if($row->status == 2)
-                <td scope="col" ><h5>{{ $no++ }}</h5></td>
-                <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
-                <td scope="col"><h5>{{ date('d-m-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
-                <td scope="col"><h5>{{ date('d-m-Y', strtotime($row->tanggalPengembalian))}}</h5></td>
-                <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
-                <td scope="col">
+                <td scope="col" style="text-align: center"><h5>{{ $no++ }}</h5></td>
+                <td scope="col" style="text-align: center"><h5>{{ $row->kodeSewa }}</h5></td>
+                <td scope="col" style="text-align: center"><h5>{{ date('d-m-Y', strtotime($row->tanggalPeminjaman)) }}</h5></td>
+                <td scope="col" style="text-align: center"><h5>{{ date('d-m-Y', strtotime($row->tanggalPengembalian))}}</h5></td>
+                <td scope="col" style="text-align: center"><h5>{{ $row->totalBiayaSewa }}</h5></td>
+                <td scope="col" style="text-align: center">
                   <button type="button" id="{{ $row->kodeSewa }}" class="btn btn-primary" data-toggle="modal" data-target="#detailSewa" onclick="detailSewa(this.id)">
                     Detail
                   </button>
