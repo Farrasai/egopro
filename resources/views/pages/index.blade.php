@@ -10,7 +10,6 @@
   $productsEquipment = DB::table('products')->where('category_id', 3)->limit(10)->orderBy('id','DESC')->get();
   $productsLensa = DB::table('products')->where('category_id', 4)->limit(10)->orderBy('id','DESC')->get();
   $productsLighting = DB::table('products')->where('category_id', 5)->limit(10)->orderBy('id','DESC')->get();
-
 @endphp
 
 <!-- Banner -->
@@ -81,11 +80,12 @@
             <div class="owl-item">
               <div
                 class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+                style="min-height: 250px"
               >
                 <div class="viewed_image">
-                  <img src="{{asset($product->image)}}" alt="" />
+                  <img src="{{asset($product->image)}}"/>
                 </div>
-                <div class="viewed_content text-center">
+                <div class="viewed_content text-center" style="margin-top:0px">
                   <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
@@ -102,7 +102,7 @@
   </div>
 </div>
 
-<div class="viewed">
+<div class="viewed" style="margin-top:-40px ">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -127,11 +127,12 @@
             <div class="owl-item">
               <div
                 class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+                style="min-height:250px;"
               >
                 <div class="viewed_image">
                   <img src="{{asset($product->image)}}" alt="" />
                 </div>
-                <div class="viewed_content text-center">
+                <div class="viewed_content text-center" style="margin-top:0px">
                   <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
@@ -148,7 +149,7 @@
   </div>
 </div>
 
-<div class="viewed">
+<div class="viewed" style="margin-top:-40px ">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -172,12 +173,12 @@
             @foreach($productsEquipment as $product)
             <div class="owl-item">
               <div
-                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center" style="min-height:250px;"
               >
                 <div class="viewed_image">
                   <img src="{{asset($product->image)}}" alt="" />
                 </div>
-                <div class="viewed_content text-center">
+                <div class="viewed_content text-center" style="margin-top:0px">
                   <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
@@ -194,7 +195,7 @@
   </div>
 </div>
 
-<div class="viewed">
+<div class="viewed" style="margin-top:-40px ">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -218,12 +219,12 @@
             @foreach($productsLensa as $product)
             <div class="owl-item">
               <div
-                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center" style="min-height:250px;"
               >
                 <div class="viewed_image">
                   <img src="{{asset($product->image)}}" alt="" />
                 </div>
-                <div class="viewed_content text-center">
+                <div class="viewed_content text-center" style="margin-top:0px">
                   <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
@@ -240,7 +241,7 @@
   </div>
 </div>
 
-<div class="viewed">
+<div class="viewed" style="margin-top:-40px;">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -264,12 +265,12 @@
             @foreach($productsLighting as $product)
             <div class="owl-item">
               <div
-                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center"
+                class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center" style="min-height:250px;"
               >
                 <div class="viewed_image">
                   <img src="{{asset($product->image)}}" alt="" />
                 </div>
-                <div class="viewed_content text-center">
+                <div class="viewed_content text-center" style="margin-top:0px">
                   <div class="viewed_price">{{rupiah($product->price)}}</div>
                   <div class="viewed_name">
                     <a href="{{ url('product/details/'.$product->id.'/'.$product->product_name) }}">{{$product->product_name}}</a>
