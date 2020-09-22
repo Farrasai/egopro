@@ -71,11 +71,17 @@
                     </div><!-- col-8 -->
                     <div class="col-lg-6">
                       <div class="form-group">
+                        <label class="form-control-label">No Identitas: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="noidentitas" id="noidentitas" placeholder="No Identitas" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
                         <label class="form-control-label">No HP: <span class="tx-danger">*</span></label>
                         <input class="form-control" type="number" name="nohp" id="nohp" placeholder="Nomer HP" required>
                       </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Password: <span class="tx-danger">*</span> 8 characters minimum</label>
                         <input class="form-control" type="password" pattern=".{8,}" title="8 characters minimum" name="pass" id="pass" placeholder="Password" required>
@@ -136,11 +142,17 @@
                     </div><!-- col-8 -->
                     <div class="col-lg-6">
                       <div class="form-group">
+                        <label class="form-control-label">No Identitas: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="noidentitased" id="noidentitased" placeholder="No Identitas" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
                         <label class="form-control-label">No HP: <span class="tx-danger">*</span></label>
                         <input class="form-control" type="number" name="nohped" id="nohped" placeholder="Nomer HP" required>
                       </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Password: 8 characters minimum</label>
                         <input class="form-control" type="password" pattern=".{8,}" title="8 characters minimum" name="passed" id="passed" placeholder="Kosongi Jika Tidak Diganti">
@@ -264,6 +276,7 @@
                   $('#namaed').val(data[0].name);
                   $('#emailed').val(data[0].email);
                   $('#alamated').val(data[0].address);
+                  $('#noidentitased').val(data[0].noIdentitas);
                   $('#nohped').val(data[0].nohp);
                   $('#gbr1').html(data[0].avatar.substr(18));
               },
