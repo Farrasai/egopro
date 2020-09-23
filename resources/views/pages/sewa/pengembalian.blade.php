@@ -33,13 +33,13 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Kode Sewa</th>
-                <th scope="col">Tanggal Pengembalian</th>
-                <th scope="col">Jam Pengembalian</th>
-                <th scope="col">Total Biaya Sewa</th>
-                <th scope="col">Penyewa Mengembalikan</th>
-                <th scope="col">Denda</th>
-                <th scope="col">Status Pengembalian</th>
+                <th scope="col" style="text-align: center">Kode</th>
+                <th scope="col" style="text-align: center">Tanggal</th>
+                <th scope="col" style="text-align: center">Jam</th>
+                <th scope="col" style="text-align: center">Total Biaya</th>
+                <th scope="col" style="text-align: center">Penyewa Mengembalikan</th>
+                <th scope="col" style="text-align: center">Denda</th>
+                <th scope="col" style="text-align: center">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -51,13 +51,13 @@
             @endphp
               <tr >
                 @if($row->status_pengembalian == 2 || $row->status_pengembalian == 3  || $row->status_pengembalian == 4 )
-                  <td scope="col" ><h5>{{ $no++ }}</h5></td>
-                  <td scope="col" ><h5>{{ $row->kodeSewa }}</h5></td>
-                  <td scope="col"><h5>{{ date('d-M-Y', strtotime($row->tanggalPengembalian)) }}</h5></td>
-                  <td scope="col"><h5>{{ $row->jamPengembalian }}</h5></td>
-                  <td scope="col"><h5>{{ $row->totalBiayaSewa }}</h5></td>
+                  <td scope="col" style="text-align: center"><h5>{{ $no++ }}</h5></td>
+                  <td scope="col" style="text-align: center"><h5>{{ $row->kodeSewa }}</h5></td>
+                  <td scope="col"style="text-align: center"><h5>{{ date('d-M-Y', strtotime($row->tanggalPengembalian)) }}</h5></td>
+                  <td scope="col" style="text-align: center"><h5>{{ $row->jamPengembalian }}</h5></td>
+                  <td scope="col" style="text-align: center"><h5>{{ $row->totalBiayaSewa }}</h5></td>
                   @if($row->tanggalAcc)
-                    <td scope="col"><h5>{{ date('d-M-Y', strtotime($userMengembalikan)) }}</h5></td>
+                    <td scope="col" style="text-align: center"><h5>{{ date('d-M-Y', strtotime($userMengembalikan)) }}</h5></td>
                   @else
                     <td scope="col"><h5></h5></td>
                   @endif
@@ -72,9 +72,9 @@
                   @endif
                   <td scope="col">
                     @if($row->status_pengembalian == 2)
-                    <div class="badge progress-bar-warning mt-3">Menunggu Pengembalian</div>
+                    <div class="badge progress-bar-warning mt-3" style="margin-left: 40px">Menunggu Pengembalian</div>
                     @elseif($row->status_pengembalian == 3)
-                    <div class="badge progress-bar-success mt-3">Sudah Dikembalikan</div>
+                    <div class="badge progress-bar-success mt-3" style="margin-left: 40px">Sudah Dikembalikan</div>
                     @endif
                   @endif
                 </td>

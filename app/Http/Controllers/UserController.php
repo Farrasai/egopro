@@ -114,6 +114,7 @@ class UserController extends Controller
       'nama' => 'required',
       'email' => 'required',
       'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'noidentitas' => 'required',
       'nohp' => 'required',
       'pass' => 'required|string|min:8',
       'alamat' => 'required'
@@ -131,6 +132,7 @@ class UserController extends Controller
       $image_url = $upload_path . $avatar_full_name;
       $success = $avatar->move($upload_path, $avatar_full_name);
       $data['avatar'] = $image_url;
+      $data['noIdentitas'] = $request->noidentitas;
       $data['nohp'] = $request->nohp;
       $data['password'] = bcrypt($request->pass);
       $data['address'] = $request->alamat;
@@ -148,6 +150,7 @@ class UserController extends Controller
       'namaed' => 'required',
       'emailed' => 'required',
       'avatared' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'noidentitased' => 'required',
       'nohped' => 'required',
       'passed' => 'string|min:8',
       'alamated' => 'required'
@@ -176,6 +179,7 @@ class UserController extends Controller
         $update = DB::table('users')->where('id', $id)->update($data);
         return response()->json(['msg' => '1']);
       } else {
+        $data['noIdentitas'] = $request->noidentitased;
         $data['nohp'] = $request->nohped;
         $data['address'] = $request->alamated;
         $update = DB::table('users')->where('id', $id)->update($data);

@@ -16,10 +16,10 @@
             </div>
             </div>
             <div class="col-sm-3 col-md-3 mg-t-10 mg-md-t-10">
-              <button class="btn btn-outline-success btn-block"><i class="fa fa-book mg-r-10"></i> Cetak Excel</button>
+              <a class="btn btn-outline-success btn-block excel"><i class="fa fa-book mg-r-10"></i> Cetak Excel</a>
             </div><!-- col-sm -->
             <div class="col-sm-3 col-md-3 mg-t-10 mg-md-t-10">
-              <button class="btn btn-outline-warning btn-block"><i class="fa fa-print mg-r-10"></i> Cetak PDF</button>
+              <a class="btn btn-outline-warning btn-block pdf"><i class="fa fa-print mg-r-10"></i> Cetak PDF</a>
             </div><!-- col-sm -->
           </div>
         <div class="card pd-20 pd-sm-40">
@@ -31,8 +31,9 @@
                   <th>Tanggal Sewa</th>
                   <th>Nama Penyewa</th>
                   <th>Barang</th>
-                  <th>Jumlah Sewa</th>
                   <th>Biaya Sewa</th>
+                  <th>Jumlah Sewa</th>
+                  <th>Sub Biaya</th>
                   <th>Denda</th>
                 </tr>
               </thead>
@@ -59,7 +60,7 @@
       $(document).ready(function() {
         $('.sl-menu-link').removeClass('active');
         $('#laporan').addClass('active');
-
+        
         function rupiah(angka){
           var rupiah = '';		
           var angkarev = angka.toString().split('').reverse().join('');
@@ -70,6 +71,8 @@
         var start = moment().subtract(29, 'days');
         var end = moment();
 
+        $(".excel").attr("href", '/admin/laporan/excel/' + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'));
+        $(".pdf").attr("href", '/admin/laporan/pdf/' + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'));
         var bTable = $('#datatable1').DataTable({
           responsive: true,
           processing: true,
@@ -114,14 +117,20 @@
               "searchable": true
             },
             {
+              "data": 'biayaSewa',
+              "name": 'biayaSewa',
+              "orderable": true,
+              "searchable": true
+            },
+            {
               "data": 'quantity',
               "name": 'quantity',
               "orderable": true,
               "searchable": true
             },
             {
-              "data": 'biayaSewa',
-              "name": 'biayaSewa',
+              "data": 'subBiayaSewa',
+              "name": 'subBiayaSewa',
               "orderable": true,
               "searchable": true
             },
@@ -143,8 +152,8 @@
                 start = startA;
                 end = endA;
                 var urldata = "/admin/laporan/serverside/" + startA.format('YYYY-MM-DD') + "/" + endA.format('YYYY-MM-DD');
-                // $(".excel").attr("href", 'DownloadExcel/?dateFrom=' + startA.format('YYYY-MM-DD') + '&dateTo=' + endA.format('YYYY-MM-DD'));
-                // $(".pdf").attr("href", 'PrintPDF/?dateFrom=' + startA.format('YYYY-MM-DD') + '&dateTo=' + endA.format('YYYY-MM-DD'));
+                $(".excel").attr("href", '/admin/laporan/excel/' + startA.format('YYYY-MM-DD') + '/' + endA.format('YYYY-MM-DD'));
+                $(".pdf").attr("href", '/admin/laporan/pdf/' + startA.format('YYYY-MM-DD') + '/' + endA.format('YYYY-MM-DD'));
                 bTable.ajax.url(urldata).load();
             }
         }

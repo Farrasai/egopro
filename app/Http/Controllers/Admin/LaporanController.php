@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use App\Exports\LaporanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use Response;
 use Validator;
@@ -47,6 +49,13 @@ class LaporanController extends Controller
         ->editColumn("biayaSewa", function ($data) {
             return rupiah($data->biayaSewa);
         })
+        ->editColumn("quantity", function ($data) {
+            $new = $data->quantity . ' Buah';
+            return $new;
+        })
+        ->editColumn("subBiayaSewa", function ($data) {
+            return rupiah($data->subBiayaSewa);
+        })
         ->editColumn("denda", function ($data) {
             if($data->denda == '0') {
                 return 'Yes';
@@ -55,5 +64,28 @@ class LaporanController extends Controller
             }   
         })
         ->make(true);
-  }
+    }
+
+    public function excel($tgl1, $tgl2)
+	{
+        $from = date($tgl1);
+        $to = date($tgl2);
+        $data = DB::table('sewa')
+        ->join('users', 'sewa.userId', '=', 'users.id')
+        ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
+        ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
+        ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
+        ->select('sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+        ->where('sewa.status', '=', '2')
+        ->where('peminjaman_barang.status_peminjaman', '=', '3')
+        ->where('pengembalian_barang.status_pengembalian', '=', '3')
+        ->whereBetween('pengembalian_barang.tanggalAcc', [$from, $to])
+        ->get();
+
+        $dataArray=$data->map(function($i) {
+            return json_decode(json_encode($i), true);
+        });
+
+		return Excel::download(new LaporanExport($dataArray), 'Laporan.xls');
+	}
 }
