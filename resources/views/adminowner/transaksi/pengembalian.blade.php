@@ -47,7 +47,7 @@
             <div class="modal-body pd-25">
                 <table>
                     <tr>
-                        <td style="width: 30%;"><h5 class="lh-3">Kode Invoice</h5></td>
+                        <td style="width: 50%;"><h5 class="lh-3">Kode Invoice</h5></td>
                         <td><h5 class="lh-3" id="kodesewa"></h5></td>
                     </tr>
                     <tr>
@@ -300,59 +300,9 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, print it!'
                   }).then((result) => {
-                    if (result.isConfirmed) {
-                      $.ajax({
-                        type: "POST",
-                        url: "{{url('/admin/transaksi/pengembalian/cetaknota')}}" + "/" + sewaid,
-                        beforeSend: function(){
-                          Swal.fire({
-                            html: '<br><br><i class="fa fa-circle-o-notch fa-spin" style="font-size:100px"></i><br><br>',
-                            showConfirmButton: false
-                          })       
-                        },
-                        complete: function(){
-                          Swal.close();
-                        },
-                        success: function(response, status, xhr) {
-                            // check for a filename
-                            var filename = "";
-                            var disposition = xhr.getResponseHeader('Content-Disposition');
-                            if (disposition && disposition.indexOf('attachment') !== -1) {
-                                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                                var matches = filenameRegex.exec(disposition);
-                                if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
-                            }
-
-                            var type = xhr.getResponseHeader('Content-Type');
-                            var blob = new Blob([response], { type: type });
-
-                            if (typeof window.navigator.msSaveBlob !== 'undefined') {
-                                // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
-                                window.navigator.msSaveBlob(blob, filename);
-                            } else {
-                                var URL = window.URL || window.webkitURL;
-                                var downloadUrl = URL.createObjectURL(blob);
-
-                                if (filename) {
-                                    // use HTML5 a[download] attribute to specify filename
-                                    var a = document.createElement("a");
-                                    // safari doesn't support this yet
-                                    if (typeof a.download === 'undefined') {
-                                        window.open(downloadUrl);
-                                    } else {
-                                        a.href = downloadUrl;
-                                        a.download = filename;
-                                        document.body.appendChild(a);
-                                        a.click();
-                                    }
-                                } else {
-                                  window.open(downloadUrl);
-                                }
-
-                                setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
-                            }
-                        }
-                    });
+                    if (result.isConfirmed) {                      
+                      var downloadUrl = "{{url('/admin/transaksi/pengembalian/cetaknota')}}" + "/" + sewaid;
+                      window.open(downloadUrl);  
                     }
                   })                  
                 } else {

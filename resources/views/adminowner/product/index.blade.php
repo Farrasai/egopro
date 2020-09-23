@@ -70,13 +70,13 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
-                        <input class="form-control" type="number" name="harga" id="harga" placeholder="Harga" required>
+                        <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxLength="12" name="harga" id="harga" placeholder="Harga" required>
                       </div>
                     </div><!-- col-4 -->
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
-                        <input class="form-control" type="number" name="stock" id="stock" placeholder="Stock" required>
+                        <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxLength="9" name="stock" id="stock" placeholder="Stock" required>
                       </div>
                     </div><!-- col-4 -->
                     <div class="col-lg-4">
@@ -157,13 +157,13 @@
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label class="form-control-label">Harga: <span class="tx-danger">*</span></label>
-                      <input class="form-control" type="number" id="hargaed" name="hargaed"  placeholder="Harga">
+                      <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxLength="12" id="hargaed" name="hargaed"  placeholder="Harga">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label class="form-control-label">Stock: <span class="tx-danger">*</span></label>
-                      <input class="form-control" type="number" id="stocked" name="stocked"  placeholder="Stock">
+                      <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxLength="9" id="stocked" name="stocked"  placeholder="Stock">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-4">

@@ -24,10 +24,11 @@
             <table id="datatable1" class="table table-hover table-bordered" style="width:100%">
               <thead class="bg-info">
                 <tr>
-                  <th class="wd-15p">Avatar</th>
+                  <th>Avatar</th>
                   <th>Nama</th>
-                  <th class="wd-20p">Email</th>
-                  <th class="wd-35p">Alamat</th>
+                  <th>No Identitas</th>
+                  <th>Email</th>
+                  <th>Alamat</th>
                   <th>No HP</th>
                   <th>Aksi</th>
                 </tr>
@@ -72,13 +73,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">No Identitas: <span class="tx-danger">*</span></label>
-                        <input class="form-control" type="number" name="noidentitas" id="noidentitas" placeholder="No Identitas" required>
+                        <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)"  name="noidentitas" id="noidentitas" placeholder="No Identitas" maxlength="16" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">No HP: <span class="tx-danger">*</span></label>
-                        <input class="form-control" type="number" name="nohp" id="nohp" placeholder="Nomer HP" required>
+                        <input class="form-control" type="number" oninput="this.value=this.value.slice(0,this.maxLength)"  name="nohp" id="nohp" placeholder="Nomer HP" maxlength="12" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -143,7 +144,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">No Identitas: <span class="tx-danger">*</span></label>
-                        <input class="form-control" type="number" name="noidentitased" id="noidentitased" placeholder="No Identitas" required>
+                        <input class="form-control" oninput="this.value=this.value.slice(0,this.maxLength)" type="number" name="noidentitased" id="noidentitased" placeholder="No Identitas" maxlength="16" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -234,6 +235,12 @@
             {
               "data": 'name',
               "name": 'name',
+              "orderable": true,
+              "searchable": true
+            },
+            {
+              "data": 'noIdentitas',
+              "name": 'noIdentitas',
               "orderable": true,
               "searchable": true
             },

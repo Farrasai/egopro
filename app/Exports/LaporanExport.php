@@ -1,38 +1,26 @@
 <?php
 
 namespace App\Exports;
-
-
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromView;
+use Illuminate\Contracts\View\View; 
 use Maatwebsite\Excel\Concerns\Exportable;
 
-class LaporanExport implements FromCollection, WithStrictNullComparison,WithHeadings
+class LaporanExport implements FromView
 {
     use Exportable;
 
-    function __construct($data) {
-        $this->data = $data; 
+    function __construct($data, $range) {
+        $this->data = $data;
+        $this->start = $range['start'];
+        $this->end = $range['end'];
     }
 
-    public function headings(): array
+    public function view(): View
     {
-        return [
-            'No',
-            'Tanggal Sewa',
-            'Nama Penyewa',
-            'Barang',
-            'Biaya Sewa',
-            'Jumlah Sewa',
-            'Sub Biaya',
-            'Denda'
-        ];
+        return view('adminowner.laporan.excel', [
+            'data' => $this->data ,
+            'start' => $this->start,
+            'end' => $this->end
+        ]);
     }
-    
-    public function collection()
-    {
-        return $this->data;
-    }
-
 }

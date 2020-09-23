@@ -68,6 +68,7 @@ class LaporanController extends Controller
 
     public function excel($tgl1, $tgl2)
 	{
+        DB::statement(DB::raw("SET @row = '0'"));
         $from = date($tgl1);
         $to = date($tgl2);
         $data = DB::table('sewa')
@@ -75,17 +76,42 @@ class LaporanController extends Controller
         ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
         ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
         ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
-        ->select('sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
         ->where('sewa.status', '=', '2')
         ->where('peminjaman_barang.status_peminjaman', '=', '3')
         ->where('pengembalian_barang.status_pengembalian', '=', '3')
         ->whereBetween('pengembalian_barang.tanggalAcc', [$from, $to])
         ->get();
 
-        $dataArray=$data->map(function($i) {
-            return json_decode(json_encode($i), true);
-        });
+        $range = ['start'=>$from, 'end'=>$to];
+        ob_end_clean(); // this
+        ob_start(); // and this
+		return Excel::download(new LaporanExport($data, $range),'Laporan-Data-'.date('Y-m-d H:i:s').'.xlsx');
+    }
+    
+    public function pdf($tgl1, $tgl2)
+	{
+        DB::statement(DB::raw("SET @row = '0'"));
+        $from = date($tgl1);
+        $to = date($tgl2);
+        $data = DB::table('sewa')
+        ->join('users', 'sewa.userId', '=', 'users.id')
+        ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
+        ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
+        ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
+        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+        ->where('sewa.status', '=', '2')
+        ->where('peminjaman_barang.status_peminjaman', '=', '3')
+        ->where('pengembalian_barang.status_pengembalian', '=', '3')
+        ->whereBetween('pengembalian_barang.tanggalAcc', [$from, $to])
+        ->get();
 
-		return Excel::download(new LaporanExport($dataArray), 'Laporan.xls');
+        $range = ['start'=>$from, 'end'=>$to];
+        $pdf = PDF::loadview('adminowner.laporan.pdf', [
+            'data' => $data,
+            'start' => $range['start'],
+            'end' => $range['end']
+          ]);
+        return $pdf->download('Laporan-Data-'.date('Y-m-d H:i:s'));
 	}
 }

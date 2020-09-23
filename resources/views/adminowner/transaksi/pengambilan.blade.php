@@ -47,7 +47,7 @@
             <div class="modal-body pd-25">
                 <table>
                     <tr>
-                        <td style="width: 30%;"><h5 class="lh-3">Kode Invoice</h5></td>
+                        <td style="width: 50%;"><h5 class="lh-3">Kode Invoice</h5></td>
                         <td><h5 class="lh-3" id="kodesewa"></h5></td>
                     </tr>
                     <tr>
