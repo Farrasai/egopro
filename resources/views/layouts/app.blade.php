@@ -90,7 +90,7 @@
                       </div>
                       <ul>
                         <li><a href="{{ route('userProfile.edit') }}">Profil</a></li>
-                        <li><a href="{{ route('password.edit') }}">Ubah Password</a></li>
+                        <li><a href="{{ route('password.edit') }}">Ganti Password</a></li>
                         <li><a href="{{ route('user.logout') }}">Logout</a></li>
                       </ul>
                     </li>
