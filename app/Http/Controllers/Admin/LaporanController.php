@@ -14,6 +14,7 @@ use Response;
 use Validator;
 use Auth;
 use PDF;
+use DateTime;
 
 
 class LaporanController extends Controller
@@ -37,7 +38,7 @@ class LaporanController extends Controller
       ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
       ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
       ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
-      ->select('sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+      ->select('sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.*')
       ->where('sewa.status', '=', '2')
       ->where('peminjaman_barang.status_peminjaman', '=', '3')
       ->where('pengembalian_barang.status_pengembalian', '=', '3')
@@ -57,11 +58,16 @@ class LaporanController extends Controller
             return rupiah($data->subBiayaSewa);
         })
         ->editColumn("denda", function ($data) {
-            if($data->denda == '0') {
-                return 'Yes';
-            } else {
-                return 'No';
-            }   
+            $awal  = strtotime($data->tanggalPengembalian . ' ' . $data->jamPengembalian . ':00'); //waktu awal
+            $akhir = strtotime($data->updated_at); //waktu akhir
+            $diff  = $akhir - $awal;
+            $jam   = floor($diff / (60 * 60));
+            $denda = $jam * 5000;
+            if($denda < 0) {
+                $denda = 0;
+                return rupiah($denda);
+            }
+            return rupiah($denda);
         })
         ->make(true);
     }
@@ -76,7 +82,7 @@ class LaporanController extends Controller
         ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
         ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
         ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
-        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.*')
         ->where('sewa.status', '=', '2')
         ->where('peminjaman_barang.status_peminjaman', '=', '3')
         ->where('pengembalian_barang.status_pengembalian', '=', '3')
@@ -99,7 +105,7 @@ class LaporanController extends Controller
         ->join('peminjaman_barang', 'sewa.id', '=', 'peminjaman_barang.sewaId')
         ->join('pengembalian_barang', 'sewa.id', '=', 'pengembalian_barang.sewaId')
         ->join('sewa_details', 'sewa.id', '=', 'sewa_details.sewaId')
-        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.denda')
+        ->select(DB::raw("@row:=@row+1 AS no"),'sewa_details.*', 'sewa.id', 'sewa.kodeSewa' ,'users.name', 'pengembalian_barang.*')
         ->where('sewa.status', '=', '2')
         ->where('peminjaman_barang.status_peminjaman', '=', '3')
         ->where('pengembalian_barang.status_pengembalian', '=', '3')

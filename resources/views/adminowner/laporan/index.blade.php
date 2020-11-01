@@ -24,7 +24,7 @@
           </div>
         <div class="card pd-20 pd-sm-40">
           <div class="table-wrapper">
-            <table id="datatable1" class="table table-hover table-bordered nowrap" style="width:100%">
+            <table id="datatable1" class="table table-hover table-bordered" style="width:100%">
               <thead class="bg-info">
                 <tr>
                   <th>No</th>

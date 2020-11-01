@@ -148,19 +148,24 @@ class TransaksiController extends Controller
       'updated_at' => Carbon::now()
     ]);
 
-    $anu = DB::table('pengembalian_barang')->select('tanggalPengembalian')->where('sewaId', $id)->first();
-    if (strtotime($anu->tanggalPengembalian) <= strtotime(date('m/d/Y'))) {
+    $anu = DB::table('pengembalian_barang')->select('tanggalPengembalian', 'jamPengembalian')->where('sewaId', $id)->first();
+    $awal  = strtotime($anu->tanggalPengembalian . ' ' . $anu->jamPengembalian . ':00'); //waktu awal
+    $akhir = strtotime($anu->updated_at); //waktu akhir
+    $diff  = $akhir - $awal;
+    $jam   = floor($diff / (60 * 60));
+    $denda = $jam * 5000;
+    if($denda < 0) {
       $ngembaliin = DB::table('pengembalian_barang')->where('sewaId', $id)->update([
         'status_pengembalian' => '3',
         'tanggalAcc' => Carbon::now(),
         'denda' => '0',
         'updated_at' => Carbon::now()
       ]);
-    } else if (strtotime($anu->tanggalPengembalian) > strtotime(date('m/d/Y'))) {
+    } else {
       $ngembaliin = DB::table('pengembalian_barang')->where('sewaId', $id)->update([
         'status_pengembalian' => '3',
         'tanggalAcc' => Carbon::now(),
-        'denda' => '1',
+        'denda' => $denda,
         'updated_at' => Carbon::now()
       ]);
     }

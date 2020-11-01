@@ -51,8 +51,16 @@
 	@php 
         $i=1;
         $subtotal = 0; 
+    	$totaldenda = 0;
     @endphp
     @foreach($data as $p)
+	@php 
+		$awal  = strtotime($p->tanggalPengembalian . ' ' . $p->jamPengembalian . ':00'); 
+		$akhir = strtotime($p->updated_at); 
+		$diff  = $akhir - $awal;
+		$jam   = floor($diff / (60 * 60));
+		$denda = $jam * 5000;
+    @endphp
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"  align="right" sdval="1" sdnum="1033;"><font color="#000000">{{ $i++ }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ $p->tanggalSewa }}</font></td>
@@ -61,13 +69,16 @@
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ rupiah($p->biayaSewa) }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ $p->quantity . ' Buah' }}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ rupiah($p->subBiayaSewa) }}</font></td>
-        @if($p->denda == '1')
-		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">Yes</font></td>
-        @else
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">No</font></td>
-        @endif
+        @if($denda < 0)
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ rupiah(0) }}</font></td>
+		@else
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="left"><font color="#000000">{{ rupiah($denda) }}</font></td>
+		@endif
     </tr>
-    @php $subtotal = $subtotal + $p->subBiayaSewa; @endphp
+	@php 
+		$subtotal = $subtotal + $p->subBiayaSewa;
+		$totaldenda = $totaldenda + $p->denda;
+	@endphp
     @endforeach
 	<tr>
 		<td height="20" align="left"><font color="#000000"><br></font></td>
@@ -87,6 +98,16 @@
 		<td align="left"><font color="#000000"><br></font></td>
 		<td align="left"><font color="#000000"><br></font></td>
 		<td align="left"><font color="#000000">Total Pendapatan : {{rupiah($subtotal)}}</font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td  align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000"><br></font></td>
+		<td align="left"><font color="#000000">Total Denda : {{rupiah($totaldenda)}}</font></td>
 		<td align="left"><font color="#000000"><br></font></td>
 	</tr>
     <tr>
