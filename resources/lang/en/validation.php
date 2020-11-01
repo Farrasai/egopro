@@ -133,6 +133,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'g-recaptcha-response' => [
+            'required' => 'Harap verifikasi bahwa Anda bukan robot',
+            'captcha' => 'Captcha error! try again later or contact site admin.',
+        ],
     ],
 
     /*
