@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'nohp' => ['required', 'string', 'min:11',  'max:13'],
             'address' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 

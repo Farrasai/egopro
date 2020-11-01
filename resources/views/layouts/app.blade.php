@@ -111,7 +111,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/cs
         </div>
         @yield('content')
     </div>
-
+    @yield('scripts')
 
 <script src="{{asset('frontend-theme/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('frontend-theme/styles/bootstrap4/popper.js')}}"></script>
