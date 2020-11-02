@@ -103,7 +103,7 @@
                       <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-12 col-form-label">Total Tarif Sesuai Lama Sewa</label>
                         <div class="col-sm-12">
-                          <input type="text" id="totalTarif" class="form-control" name="total" value="Rp.{{Cart::total()}}" required readonly>
+                          <input type="text" id="totalTarif" class="form-control"  value="Rp.{{Cart::total()}}" required readonly>
                         </div>
                       </div>
 
@@ -112,7 +112,7 @@
                         <div class="row">
                           <div class="col-6">
                             <div class="input-group ml-4 mt-2">
-                              <input type="text" class="form-control" id="jamSewa" name="jamSewa" required autocomplete="off">
+                              <input type="text" class="form-control" id="jamSewa" name="jamSewa" required autocomplete="off" value="{{ old('jamSewa') }}">
                               <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                               </span>
@@ -120,7 +120,7 @@
                           </div>
                           <div class="col-6">
                             <div class="input-group ml-4 mt-2">
-                              <input type="text" class="form-control" id="jamPengembalian" name="jamPengembalian" required autocomplete="off">
+                              <input type="text" class="form-control" id="jamPengembalian" name="jamPengembalian" required autocomplete="off" value="{{ old('jamPengembalian') }}"> 
                               <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                               </span>
